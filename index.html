@@ -1,0 +1,1311 @@
+<title>Kill Quentin</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ultra&family=Abril+Fatface&family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;1,500&display=swap">
+<style>
+/* Layout: one dark "screening room" app — title cards in Tarantino yellow, white playing cards on a near-black table */
+:root{
+  color-scheme:dark;
+  --bg:#0D0D0F; --panel:#18181C; --panel2:#222228; --line:#34343C;
+  --text:#F2EDE1; --muted:#A8A396; --yellow:#F3C531; --ink:#17181C;
+  --red:#C8302F; --red-soft:#F2A7A5; --gold:#E0A526; --gold-soft:#F5D98B; --gold-ink:#8A5A00;
+  --win:#F3C531; --paper:#FFFFFF; --paper-line:#D5D5DA; --bar-bg:#E4E4E8;
+  --f-title:'Ultra','Rockwell Extra Bold','Georgia',serif;
+  --f-name:'Abril Fatface',Georgia,serif;
+  --f-ui:'Barlow Condensed','Arial Narrow',Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{background:var(--bg);color:var(--text);font-family:var(--f-ui);font-size:17px;line-height:1.35;margin:0}
+button{font-family:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px 40px}
+.title{font-family:var(--f-title);color:var(--yellow);font-weight:400;letter-spacing:.01em;line-height:.92;margin:0;text-transform:uppercase}
+.eyebrow{font-family:var(--f-title);color:var(--yellow);font-size:14px;letter-spacing:.14em;text-transform:uppercase;margin:0}
+.btn{border:2px solid var(--yellow);background:var(--yellow);color:var(--ink);font-weight:700;font-size:18px;letter-spacing:.06em;text-transform:uppercase;padding:10px 20px;border-radius:4px;min-height:46px}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:var(--yellow)}
+.btn.small{font-size:15px;padding:6px 12px;min-height:38px}
+.btn:disabled{opacity:.35;cursor:not-allowed;filter:none}
+.muted{color:var(--muted)}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+[hidden]{display:none!important}
+
+/* ---------- HOME ---------- */
+.home{display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px;padding-top:2vh}
+/* the home is an old one-sheet: folded, sun-faded paper, three-ink print */
+.poster{--paper:#E6D3A8;--pink:#1B1712;--pred:#B3261E;width:min(520px,100%);position:relative;color:var(--pink);background-color:var(--paper);
+  background-image:
+    linear-gradient(90deg,transparent 49.7%,rgba(60,40,10,.16) 50%,rgba(255,255,255,.18) 50.3%,transparent 50.6%),
+    linear-gradient(0deg,transparent 33.2%,rgba(60,40,10,.12) 33.4%,rgba(255,255,255,.14) 33.6%,transparent 33.8%),
+    linear-gradient(0deg,transparent 66.4%,rgba(60,40,10,.12) 66.6%,rgba(255,255,255,.14) 66.8%,transparent 67%),
+    radial-gradient(ellipse at 15% 8%,rgba(255,250,235,.55),transparent 55%),
+    radial-gradient(ellipse at 90% 95%,rgba(110,70,20,.35),transparent 60%),
+    radial-gradient(ellipse at 0% 100%,rgba(110,70,20,.25),transparent 45%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .1 0 0 0 .35 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  padding:22px 22px 18px;display:flex;flex-direction:column;align-items:center;gap:10px;container-type:inline-size;box-shadow:0 18px 40px rgba(0,0,0,.6);transform:rotate(-.7deg);border-radius:2px}
+.poster::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 40px rgba(90,55,15,.45);border-radius:2px}
+.poster .pre{font-family:var(--f-ui);font-weight:700;letter-spacing:.32em;text-transform:uppercase;font-size:clamp(11px,2.6vw,14px);margin:0}
+.poster .tagline{font-family:var(--f-name);font-size:clamp(17px,4.2vw,22px);margin:0;line-height:1.15;text-wrap:balance}
+.poster .ptitle{font-family:var(--f-title);font-weight:400;text-transform:uppercase;margin:4px 0 0;line-height:.86;font-size:clamp(40px,14.5cqi,92px);max-width:100%;color:var(--yellow);-webkit-text-stroke:2px var(--pink);text-shadow:5px 5px 0 var(--pred),5px 5px 0 var(--pred);letter-spacing:.01em}
+.poster .psub{font-family:var(--f-title);font-size:clamp(13px,3.2vw,17px);letter-spacing:.24em;text-transform:uppercase;margin:0;color:var(--pred)}
+.poster .faces{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;width:100%;margin:6px 0 2px;border:2px solid var(--pink);background:var(--pink)}
+.poster .faces img{display:block;width:100%;aspect-ratio:1;object-fit:cover;filter:grayscale(1) sepia(.6) contrast(1.15) brightness(1.15)}
+.poster .faces img:nth-child(odd){filter:grayscale(1) sepia(1) hue-rotate(-30deg) saturate(2.4) contrast(1.1) brightness(1.1)}
+.poster .billing{font-family:var(--f-ui);font-weight:600;font-stretch:condensed;text-transform:uppercase;font-size:clamp(10.5px,2.5vw,12.5px);line-height:1.25;letter-spacing:.06em;margin:4px 0 0;text-wrap:balance}
+.poster .billing b{font-weight:700}
+.poster .soon{font-family:var(--f-title);color:var(--pred);text-transform:uppercase;letter-spacing:.12em;font-size:clamp(14px,3.6vw,19px);margin:4px 0 0;border-top:2px solid var(--pink);border-bottom:2px solid var(--pink);padding:4px 10px}
+.poster .rating{display:flex;justify-content:space-between;width:100%;font-family:var(--f-ui);font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.8}
+.poster .rating span:first-child{border:1.5px solid var(--pink);padding:0 5px}
+.menu{display:flex;flex-direction:column;gap:12px;width:min(360px,100%)}
+.menu .btn{width:100%}
+.menu .hint{font-size:14px;color:var(--muted);margin:-6px 0 0}
+.setup{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px;display:flex;flex-direction:column;gap:12px;width:min(420px,100%);text-align:left}
+.setup h3{margin:0;font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;gap:8px;flex-wrap:wrap}
+.seg button{flex:1 1 0;min-width:90px;border:2px solid var(--line);background:var(--panel2);color:var(--text);border-radius:4px;padding:8px 10px;font-size:17px;font-weight:600;min-height:44px}
+.seg button[aria-pressed="true"]{border-color:var(--yellow);color:var(--yellow)}
+.seg .r[aria-pressed="true"]{border-color:var(--red);color:#FF8A86}
+.seg .g[aria-pressed="true"]{border-color:var(--gold);color:var(--gold-soft)}
+
+/* ---------- PAGES (rules, stats) ---------- */
+.page{display:flex;flex-direction:column;gap:18px;max-width:720px;margin:0 auto}
+.page .title{font-size:clamp(40px,8vw,64px)}
+.page h2{font-family:var(--f-title);font-weight:400;color:var(--yellow);font-size:22px;margin:8px 0 0;letter-spacing:.02em}
+.page p,.page li{margin:0;max-width:65ch}
+.page ol,.page ul{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
+.just{text-align:justify;hyphens:auto}
+.powers{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.powers div{background:var(--panel);border:1px solid var(--line);border-left:0;border-radius:4px;padding:10px 12px}
+.powers b{display:block;color:var(--yellow);letter-spacing:.06em;text-transform:uppercase;font-size:15px}
+table.st{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+.tblwrap{overflow-x:auto;flex-shrink:0}
+table.st th,table.st td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right}
+table.st th:first-child,table.st td:first-child{text-align:left}
+table.st thead th{color:var(--muted);font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:14px}
+table.st tr.tot td{color:var(--yellow);font-weight:700;border-bottom:0}
+.codebox{width:100%;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:4px;padding:10px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;word-break:break-all;resize:vertical;min-height:70px}
+.note{font-size:15px;color:var(--muted)}
+.ok{color:#9BE29B}.err{color:#FF8A86}
+.confirm{background:var(--panel);border:1px solid var(--red);border-radius:6px;padding:12px;display:flex;flex-direction:column;gap:10px}
+
+/* ---------- GAME ---------- */
+.topbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:10px}
+.topbar .logo{font-family:var(--f-title);color:var(--yellow);font-size:22px;text-transform:uppercase;line-height:1}
+.phase{font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:15px}
+.phase span{color:var(--yellow)}
+.score{display:flex;gap:14px;font-variant-numeric:tabular-nums;font-size:18px;font-weight:700}
+.score b{font-family:var(--f-title);font-weight:400;font-size:24px;color:var(--yellow)}
+.side{display:flex;flex-direction:column;gap:8px;padding:12px 0;border-bottom:1px solid var(--line)}
+.side-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.who{font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:15px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.dot.R{background:var(--red)}.dot.G{background:var(--gold)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:999px;padding:5px 12px;font-size:15px;min-height:34px}
+.chip b{color:var(--yellow);font-variant-numeric:tabular-nums}
+.backs{display:flex;gap:6px}
+.mini-back{width:34px;height:48px;border-radius:3px;border:1px solid var(--line);background:repeating-linear-gradient(135deg,#17181C 0 6px,var(--c) 6px 12px)}
+.stage{padding:16px 0;display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center;min-height:200px}
+.prompt{font-size:20px;font-weight:600;margin:0;max-width:60ch}
+.prompt em{font-style:normal;color:var(--yellow)}
+.voci{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.voci button{border:2px solid var(--line);background:var(--panel2);color:var(--text);border-radius:4px;padding:8px 12px;font-size:16px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;min-height:44px}
+.voci button[aria-pressed="true"]{border-color:var(--yellow);color:var(--ink);background:var(--yellow)}
+.voci button:disabled{opacity:.4;cursor:not-allowed}
+.voci button.u{text-decoration:line-through}
+.hand{display:flex;gap:12px;overflow-x:auto;padding:6px 2px 12px;justify-content:center;scroll-snap-type:x mandatory}
+.hand>*{scroll-snap-align:center}
+@media (max-width:640px){.hand{justify-content:flex-start}}
+.hand .card{cursor:pointer}
+.tracks{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;align-items:stretch}
+.trk{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:6px 8px;display:flex;flex-direction:column;gap:3px;min-width:0;position:relative}
+.trk .tn{font-size:13px;font-weight:600;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.trk .tv{font-family:var(--f-title);color:var(--yellow);font-size:22px;line-height:1}
+.trk .pips{display:flex;flex-wrap:wrap;gap:3px;min-height:8px;font-size:12px;color:var(--muted)}
+.trk .pips i{width:8px;height:8px;border-radius:50%;background:var(--yellow)}
+.trk.x{opacity:.45;border-style:dashed}
+.trk.x .tv{color:var(--muted)}
+.trk.off{border-color:var(--muted)}
+.trk.off .tv{color:var(--muted);text-decoration:line-through}
+.trk.off .pips i{background:var(--muted)}
+.trk .tag{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.tsum{grid-column:1/-1;display:flex;gap:10px;align-items:baseline;font-size:15px}
+.tsum b{font-family:var(--f-title);font-weight:400;color:var(--yellow);font-size:20px}
+.tsum span{color:var(--muted);font-size:13px}
+.cine{position:fixed;inset:0;z-index:60;background:#000;display:flex;align-items:center;justify-content:center;text-align:center;animation:cine-bg 3.8s ease forwards;cursor:pointer;padding:16px}
+.cine-in{display:flex;flex-direction:column;align-items:center;gap:14px;animation:cine-in 3.8s cubic-bezier(.2,.7,.2,1) forwards}
+.cine-t{font-family:var(--f-title);font-weight:400;text-transform:uppercase;line-height:.9;font-size:clamp(40px,14vw,190px);color:var(--yellow);-webkit-text-stroke:1px #1B1712;text-shadow:4px 4px 0 #B3261E;letter-spacing:.01em;white-space:nowrap}
+.cine.lose .cine-t{color:#E8E2D2}
+.cine.lose .cine-t,.cine.draw .cine-t{text-shadow:4px 4px 0 #4a1412}
+.cine-s{font-family:var(--f-title);text-transform:uppercase;letter-spacing:.35em;font-size:clamp(12px,2.6vw,20px);color:#B3261E}
+.cine-bar{width:min(520px,70vw);height:3px;background:var(--yellow);opacity:.8}
+@keyframes cine-bg{0%{opacity:0}8%{opacity:1}82%{opacity:1}100%{opacity:0}}
+@keyframes cine-in{0%{transform:scale(.7);opacity:0;letter-spacing:.2em}18%{transform:scale(1);opacity:1}100%{transform:scale(1.06);opacity:1}}
+@media (prefers-reduced-motion:reduce){.cine-in{animation:none}.cine{animation-duration:3.8s}}
+.legal{max-width:520px;margin:28px auto 8px;text-align:center;font-size:12px;line-height:1.5;color:var(--muted);opacity:.85}
+.gamegrid{display:block}
+.gmain{min-width:0}
+.fab{position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:max(14px,env(safe-area-inset-bottom,0px));z-index:20;background:var(--yellow);color:#111;border:0;border-radius:999px;padding:12px 18px;font:700 15px/1 inherit;font-family:inherit;letter-spacing:.04em;text-transform:uppercase;min-height:48px;box-shadow:0 4px 16px rgba(0,0,0,.6);cursor:pointer}
+@media (min-width:1000px){
+  .gamegrid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:28px;align-items:start}
+  .gside{grid-column:2;grid-row:1;position:sticky;top:12px}
+  .gmain{grid-column:1;grid-row:1}
+  .gside .board{margin-top:0}
+  .fab{display:none}
+}
+.board{display:grid;gap:5px;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 12px;margin-top:12px;width:100%}
+.bhead,.bfoot{display:grid;grid-template-columns:1fr auto 1fr;align-items:baseline;gap:8px;font-size:15px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.bhead span:first-child,.bfoot span:first-child{text-align:left}.bhead span:last-child,.bfoot span:last-child{text-align:right}
+.bhead span:nth-child(2){color:var(--muted);font-size:13px}
+.bfoot b{font-family:var(--f-title);font-weight:400;color:var(--yellow);font-size:22px}
+.bfoot .bt{color:var(--muted);font-size:12px;text-transform:none;letter-spacing:0;font-weight:500;text-align:center}
+.brow{display:grid;grid-template-columns:1fr 108px 1fr;gap:8px;align-items:center}
+.brow.x{opacity:.45}
+.brow.bonus .bc{justify-content:flex-start}.brow.bonus .bv{color:var(--yellow)}
+.bn{text-align:center;font-weight:600;color:var(--muted);font-size:13px;white-space:nowrap}
+.brow.x .bn{grid-column:1/-1}
+.bc{display:flex;align-items:center;gap:7px;min-height:24px;padding:2px 4px;border-radius:4px}
+.bc.you{flex-direction:row-reverse}
+.bc .pips{display:flex;flex-wrap:wrap;gap:3px;align-items:center}
+.bc .pips i{width:9px;height:9px;border-radius:50%;background:var(--pc)}
+.bc.you .pips{flex-direction:row-reverse}
+.bc .bv{font-family:var(--f-title);font-size:19px;line-height:1;min-width:1.1em;text-align:center;color:var(--text)}
+.bc.off .bv{color:var(--muted);text-decoration:line-through}
+.bc.off .pips i{background:var(--muted)}
+.bc.hot{background:rgba(243,197,49,.2);box-shadow:0 0 0 2px var(--yellow)}
+.card[disabled]{opacity:.35;pointer-events:none}
+.setup input[type=text]{background:var(--panel2);border:2px solid var(--line);color:var(--text);border-radius:4px;padding:8px 10px;font-size:18px;font-family:inherit;min-height:44px;width:100%}
+.setup label{font-size:14px;color:var(--muted)}
+.chips2{display:flex;gap:6px;flex-wrap:wrap}
+.endtracks{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;width:100%;max-width:900px;text-align:left}
+.coach{background:#2A2414;border:2px solid var(--yellow);border-radius:6px;padding:12px 14px;margin-top:12px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.coach p{margin:0;max-width:70ch}
+.coach b{color:var(--yellow)}
+.sheet.trivia-wrap{align-items:center}
+.trivia{background:var(--paper2,#E6D3A8);color:#1B1712;border-radius:4px;padding:22px;width:min(460px,100%);display:flex;flex-direction:column;gap:10px;text-align:center;align-items:center;box-shadow:0 18px 40px rgba(0,0,0,.6);transform:rotate(-.6deg);margin-bottom:max(16px,env(safe-area-inset-bottom,0px))}
+.trivia .eyebrow{color:#B3261E}
+.trivia .tfilm{margin:0;font-family:var(--f-title);font-size:22px;line-height:1.05;text-transform:uppercase}
+.trivia .tfilm span{color:#B3261E}
+.trivia .ttext{margin:0;font-family:var(--f-name);font-size:19px;line-height:1.3;text-wrap:balance}
+.trivia .tsrc{margin:0;font-size:13px;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
+.vtrack{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;align-items:center;font-size:14px}
+.vtrack span{color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin-right:4px}
+.vtrack i{font-style:normal;border:1px solid var(--yellow);color:var(--yellow);border-radius:999px;padding:2px 10px;font-weight:600}
+.vtrack i.u{border-color:var(--line);color:var(--muted);text-decoration:line-through}
+.actbar{display:flex;justify-content:center;padding:4px 0 14px}
+.ann{display:inline-flex;gap:8px;align-items:center;background:var(--yellow);color:var(--ink);font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border-radius:4px;font-size:16px}
+
+/* reveal */
+.reveal{display:flex;gap:16px;justify-content:center;flex-wrap:nowrap}
+.slot{display:flex;flex-direction:column;align-items:center;gap:6px}
+.slot .lab{font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:14px;color:var(--muted)}
+.verdict{font-family:var(--f-title);color:var(--yellow);font-size:clamp(22px,4.5vw,34px);margin:0;line-height:1.05;text-transform:uppercase}
+.verdict.lost{color:var(--muted)}
+.explain{margin:0;color:var(--text);max-width:60ch}
+.events{display:flex;flex-direction:column;gap:8px;width:min(640px,100%)}
+.event{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 12px;text-align:left}
+.event b{color:var(--yellow);text-transform:uppercase;letter-spacing:.06em}
+.picker{display:flex;gap:10px;overflow-x:auto;padding:6px 2px 10px;justify-content:flex-start;max-width:100%}
+.picker .card{cursor:pointer}
+
+/* history */
+.hist{display:flex;flex-direction:column;gap:8px;padding-top:14px}
+.hist h3{margin:0;font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.htrack{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px}
+.hitem{flex:none;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:8px;display:flex;flex-direction:column;gap:6px;width:176px}
+.hitem .hv{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.hpair{display:flex;gap:6px}
+.hcard{flex:1;border-radius:4px;overflow:hidden;border:2px solid transparent;position:relative;background:#000}
+.hcard img{display:block;width:100%;height:46px;object-fit:cover;opacity:.55}
+.hcard.w{border-color:var(--win)}
+.hcard.w img{opacity:1}
+.hcard span{display:block;font-size:12px;padding:2px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:var(--panel2)}
+.hcard i{position:absolute;top:3px;right:4px;font-style:normal;font-weight:700;font-size:13px;background:var(--ink);color:var(--yellow);padding:0 4px;border-radius:2px}
+.hitem .res{font-size:13px;font-weight:700}
+.hitem .res.me{color:var(--yellow)}
+
+/* sheet / modal */
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.78);display:flex;align-items:flex-end;justify-content:center;z-index:30;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
+.sheet-in{background:var(--panel);border:1px solid var(--line);border-bottom:0;border-radius:10px 10px 0 0;width:min(1000px,100%);max-height:86vh;overflow:auto;padding:16px 16px calc(20px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:12px}
+.sheet-in>*{flex-shrink:0}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.sheet-head h3{margin:0;font-family:var(--f-title);font-weight:400;color:var(--yellow);font-size:22px}
+.grid{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+
+/* ---------- CARD ---------- */
+.card{--cw:200px;width:var(--cw);height:calc(var(--cw)*1.399);font-size:calc(var(--cw)/19.8);flex:none;background:var(--paper);color:var(--ink);border:1px solid #B9BAC0;border-radius:.5em;display:flex;flex-direction:column;overflow:hidden;position:relative;text-align:left;transition:transform .15s ease,box-shadow .15s ease,opacity .2s}
+.card.lg{--cw:clamp(150px,40vw,230px)}
+.card.md{--cw:clamp(168px,30vw,210px)}
+.card.sm{--cw:150px}
+.card .clap{height:1em;flex:none;background:repeating-linear-gradient(135deg,var(--ink) 0 .75em,var(--dc) .75em 1.5em)}
+.card.R{--dc:var(--red);--dsoft:var(--red-soft);--dyear:var(--red)}
+.card.G{--dc:var(--gold);--dsoft:var(--gold-soft);--dyear:var(--gold-ink)}
+.card .art{position:relative;height:39%;flex:none;border-top:.17em solid var(--ink);border-bottom:.17em solid var(--ink);background:var(--ink)}
+.card .art img{display:block;width:100%;height:100%;object-fit:cover}
+.card .cchips{position:absolute;left:.67em;right:.67em;top:.58em;display:flex;justify-content:flex-end;align-items:center;gap:.5em}
+.card .quota{font-size:1em;font-weight:600;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:baseline;gap:.33em;background:#fff;border:.125em solid var(--ink);border-radius:.25em;padding:0 .58em;color:var(--ink)}
+.card .quota b{font-size:1.33em;font-weight:700;letter-spacing:0}
+.card .vale{margin-right:auto;font-size:1em;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--dc);color:#fff;border:.125em solid var(--ink);border-radius:.25em;padding:.08em .58em}
+.card.G .vale{color:var(--ink)}
+.card .power{position:absolute;left:0;right:0;bottom:0;background:rgba(23,24,28,.9);color:#fff;padding:.3em .6em .38em;display:flex;flex-direction:column;font-size:.9em;line-height:1.15}
+.card .power b{font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dsoft)}
+.card .cbody{flex:1;display:flex;flex-direction:column;gap:.33em;padding:.42em 1em .67em;min-height:0}
+.card .cname{margin:0;font-family:var(--f-name);font-weight:400;font-size:1.58em;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .stats{display:flex;flex-direction:column;gap:.17em}
+.card .st{display:grid;grid-template-columns:minmax(0,1fr) 3.4em 2em;align-items:center;column-gap:.5em;height:1.58em;padding:0 .5em;border-radius:.25em}
+.card .lb{font-size:.95em;font-weight:600;letter-spacing:0;text-transform:uppercase;display:flex;align-items:center;gap:.42em;white-space:nowrap;overflow:hidden}
+.card .lb svg{flex:none;width:1em;height:1em}
+.card .bar{height:.5em;background:var(--bar-bg);border-radius:.25em;overflow:hidden}
+.card .bar i{display:block;height:100%;border-radius:.25em;background:var(--dc)}
+.card .vl{font-size:1.33em;font-weight:700;text-align:right;font-variant-numeric:tabular-nums}
+.card .st.tc{background:var(--ink);color:#fff}
+.card .st.tc .bar{background:#4A4B52}
+.card .st.tc .bar i{background:var(--dsoft)}
+.card .st.hi{outline:.2em solid var(--yellow);outline-offset:-.1em;background:#FFF3C4}
+.card .st.tc.hi{background:var(--ink)}
+.card .film{margin:auto 0 0;display:flex;justify-content:space-between;align-items:baseline;gap:.67em;font-size:1em;font-weight:700;letter-spacing:.06em;text-transform:uppercase;line-height:1.2;border-top:1px solid var(--paper-line);padding-top:.42em}
+.card .film span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card .film .yr{flex:none;font-weight:600;color:var(--dyear)}
+.card.sel{transform:translateY(-8px);box-shadow:0 0 0 4px var(--yellow),0 12px 24px rgba(0,0,0,.5)}
+.card.win{box-shadow:0 0 0 5px var(--win),0 0 32px rgba(243,197,49,.55)}
+.card.lose{opacity:.5;filter:grayscale(.6)}
+.card .stamp{position:absolute;top:44%;left:50%;transform:translate(-50%,-50%) rotate(-8deg);font-family:var(--f-title);font-size:2.3em;color:var(--ink);background:var(--yellow);padding:.1em .5em;border:.15em solid var(--ink);border-radius:.2em;text-transform:uppercase;white-space:nowrap;pointer-events:none}
+.back{width:var(--cw);height:calc(var(--cw)*1.399);font-size:calc(var(--cw)/19.8);border-radius:.5em;border:1px solid var(--line);background:#111114;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:.6em;position:relative;overflow:hidden;flex:none}
+.back::before,.back::after{content:"";position:absolute;left:0;right:0;height:1.4em;background:repeating-linear-gradient(135deg,var(--ink) 0 .75em,var(--dc) .75em 1.5em)}
+.back::before{top:0}.back::after{bottom:0}
+.back.R{--dc:var(--red)}.back.G{--dc:var(--gold)}
+.back .bt{font-family:var(--f-title);color:var(--yellow);font-size:2.6em;line-height:.9;text-align:center;text-transform:uppercase}
+.back .bs{font-size:1.1em;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+
+.final{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:20px 0}
+.final .title{font-size:clamp(46px,10vw,96px)}
+.final .big{font-size:22px;font-variant-numeric:tabular-nums}
+
+@media (prefers-reduced-motion:reduce){.card{transition:none}}
+</style>
+
+<div class="wrap" id="app"></div>
+
+<script>
+const CARDS = [{"id": 0, "name": "Mr. Blonde", "deck": "R", "stats": [49, 37, 26, 12, 6], "letters": "ABCDE", "quota": 15, "power": null, "slug": "mr-blonde", "film": "Le iene", "year": "1992"}, {"id": 1, "name": "Gogo Yubari", "deck": "R", "stats": [35, 24, 8, 48, 15], "letters": "BCEAD", "quota": 24, "power": null, "slug": "gogo-yubari", "film": "Kill Bill: Volume 1", "year": "2003"}, {"id": 2, "name": "Stuntman Mike", "deck": "R", "stats": [23, 8, 50, 36, 13], "letters": "CEABD", "quota": 7, "power": null, "slug": "stuntman-mike", "film": "Grindhouse: A prova di morte", "year": "2007"}, {"id": 3, "name": "Donny Donowitz", "deck": "R", "stats": [31, 24, 15, 9, 51], "letters": "BCDEA", "quota": 16, "power": null, "slug": "donny-donowitz", "film": "Bastardi senza gloria", "year": "2009"}, {"id": 4, "name": "Marsellus Wallace", "deck": "R", "stats": [26, 49, 7, 13, 35], "letters": "CAEDB", "quota": 13, "power": null, "slug": "marsellus-wallace", "film": "Pulp Fiction", "year": "1994"}, {"id": 5, "name": "Cliff Booth", "deck": "R", "stats": [16, 24, 32, 49, 9], "letters": "DCBAE", "quota": 29, "power": null, "slug": "cliff-booth", "film": "C'era una volta a… Hollywood", "year": "2019"}, {"id": 6, "name": "O-Ren Ishii", "deck": "R", "stats": [24, 50, 6, 15, 35], "letters": "CAEDB", "quota": 13, "power": null, "slug": "o-ren-ishii", "film": "Kill Bill: Volume 1", "year": "2003"}, {"id": 7, "name": "Elle Driver", "deck": "R", "stats": [37, 51, 4, 24, 14], "letters": "BAECD", "quota": 7, "power": null, "slug": "elle-driver", "film": "Kill Bill: Volume 1 e 2", "year": "2003"}, {"id": 8, "name": "Budd", "deck": "R", "stats": [16, 34, 50, 24, 6], "letters": "DBACE", "quota": 18, "power": null, "slug": "budd", "film": "Kill Bill: Volume 2", "year": "2004"}, {"id": 9, "name": "Bill", "deck": "R", "stats": [6, 26, 33, 14, 51], "letters": "ECBDA", "quota": 16, "power": null, "slug": "bill", "film": "Kill Bill: Volume 2", "year": "2004"}, {"id": 10, "name": "Django", "deck": "R", "stats": [50, 8, 4, 34, 24], "letters": "ADEBC", "quota": 17, "power": "Catene spezzate", "slug": "django", "film": "Django Unchained", "year": "2012"}, {"id": 11, "name": "John Ruth", "deck": "R", "stats": [3, 37, 52, 13, 25], "letters": "EBADC", "quota": 5, "power": null, "slug": "john-ruth", "film": "The Hateful Eight", "year": "2015"}, {"id": 12, "name": "Aldo Raine", "deck": "R", "stats": [49, 26, 12, 34, 9], "letters": "ACDBE", "quota": 23, "power": null, "slug": "aldo-raine", "film": "Bastardi senza gloria", "year": "2009"}, {"id": 13, "name": "Shosanna Dreyfus", "deck": "R", "stats": [4, 8, 52, 21, 35], "letters": "EDACB", "quota": 1, "power": "Riscrivere la storia", "slug": "shosanna-dreyfus", "film": "Bastardi senza gloria", "year": "2009"}, {"id": 14, "name": "Butch Coolidge", "deck": "R", "stats": [34, 49, 16, 5, 26], "letters": "BADEC", "quota": 30, "power": null, "slug": "butch-coolidge", "film": "Pulp Fiction", "year": "1994"}, {"id": 15, "name": "Vincent Vega", "deck": "R", "stats": [21, 10, 33, 51, 5], "letters": "CDBAE", "quota": 13, "power": "Fuori sequenza", "slug": "vincent-vega", "film": "Pulp Fiction", "year": "1994"}, {"id": 16, "name": "Beatrix Kiddo", "deck": "R", "stats": [11, 29, 22, 3, 55], "letters": "DBCEA", "quota": 13, "power": "Resa dei conti", "slug": "beatrix-kiddo", "film": "Kill Bill: Volume 1 e 2", "year": "2003"}, {"id": 17, "name": "Hans Landa", "deck": "G", "stats": [36, 16, 51, 24, 3], "letters": "BDACE", "quota": 13, "power": null, "slug": "hans-landa", "film": "Bastardi senza gloria", "year": "2009"}, {"id": 18, "name": "Jules Winnfield", "deck": "G", "stats": [15, 37, 48, 24, 6], "letters": "DBACE", "quota": 24, "power": null, "slug": "jules-winnfield", "film": "Pulp Fiction", "year": "1994"}, {"id": 19, "name": "Mr. Pink", "deck": "G", "stats": [24, 36, 50, 17, 3], "letters": "CBADE", "quota": 8, "power": null, "slug": "mr-pink", "film": "Le iene", "year": "1992"}, {"id": 20, "name": "Calvin Candie", "deck": "G", "stats": [48, 7, 25, 36, 14], "letters": "AECBD", "quota": 24, "power": null, "slug": "calvin-candie", "film": "Django Unchained", "year": "2012"}, {"id": 21, "name": "Winston Wolf", "deck": "G", "stats": [4, 52, 21, 35, 8], "letters": "EACBD", "quota": 11, "power": "Risolvo problemi", "slug": "winston-wolf", "film": "Pulp Fiction", "year": "1994"}, {"id": 22, "name": "Mr. White", "deck": "G", "stats": [50, 28, 14, 4, 34], "letters": "ACDEB", "quota": 27, "power": null, "slug": "mr-white", "film": "Le iene", "year": "1992"}, {"id": 23, "name": "Dr. King Schultz", "deck": "G", "stats": [14, 25, 35, 49, 7], "letters": "DCBAE", "quota": 22, "power": null, "slug": "dr-king-schultz", "film": "Django Unchained", "year": "2012"}, {"id": 24, "name": "Marquis Warren", "deck": "G", "stats": [13, 24, 37, 4, 52], "letters": "DCBEA", "quota": 2, "power": null, "slug": "marquis-warren", "film": "The Hateful Eight", "year": "2015"}, {"id": 25, "name": "Rick Dalton", "deck": "G", "stats": [8, 3, 23, 52, 34], "letters": "DECAB", "quota": 13, "power": "Riscrivere la storia", "slug": "rick-dalton", "film": "C'era una volta a… Hollywood", "year": "2019"}, {"id": 26, "name": "Jackie Brown", "deck": "G", "stats": [15, 49, 24, 35, 7], "letters": "DACBE", "quota": 18, "power": null, "slug": "jackie-brown", "film": "Jackie Brown", "year": "1997"}, {"id": 27, "name": "Ordell Robbie", "deck": "G", "stats": [52, 37, 26, 12, 3], "letters": "ABCDE", "quota": 8, "power": null, "slug": "ordell-robbie", "film": "Jackie Brown", "year": "1997"}, {"id": 28, "name": "Oswaldo Mobray", "deck": "G", "stats": [7, 26, 35, 48, 14], "letters": "ECBAD", "quota": 27, "power": null, "slug": "oswaldo-mobray", "film": "The Hateful Eight", "year": "2015"}, {"id": 29, "name": "Joe Cabot", "deck": "G", "stats": [38, 26, 13, 3, 50], "letters": "BCDEA", "quota": 7, "power": null, "slug": "joe-cabot", "film": "Le iene", "year": "1992"}, {"id": 30, "name": "Daisy Domergue", "deck": "G", "stats": [36, 13, 24, 7, 50], "letters": "BDCEA", "quota": 12, "power": null, "slug": "daisy-domergue", "film": "The Hateful Eight", "year": "2015"}, {"id": 31, "name": "Mia Wallace", "deck": "G", "stats": [8, 24, 35, 48, 15], "letters": "ECBAD", "quota": 17, "power": null, "slug": "mia-wallace", "film": "Pulp Fiction", "year": "1994"}, {"id": 32, "name": "Mr. Orange", "deck": "G", "stats": [3, 50, 12, 32, 23], "letters": "EADBC", "quota": 18, "power": "Sono uno sbirro", "slug": "mr-orange", "film": "Le iene", "year": "1992"}, {"id": 33, "name": "Nice Guy Eddie", "deck": "G", "stats": [48, 8, 24, 12, 28], "letters": "AECDB", "quota": 1, "power": "Stallo alla messicana", "slug": "nice-guy-eddie", "film": "Le iene", "year": "1992"}];
+const TRIVIA = [{"f": "Le iene", "y": "1992", "s": "IMDb", "t": "Il budget era così basso che molti attori recitarono con i propri vestiti: la tuta di Nice Guy Eddie era di Chris Penn."}, {"f": "Le iene", "y": "1992", "s": "IMDb", "t": "I celebri completi neri li fornì gratis la costumista, grande appassionata dei noir americani."}, {"f": "Le iene", "y": "1992", "s": "IMDb", "t": "Tarantino voleva interpretare Mr. Pink, ma lasciò fare il provino agli altri: Steve Buscemi si prese la parte."}, {"f": "Le iene", "y": "1992", "s": "IMDb", "t": "Steve Buscemi indossa i suoi jeans neri al posto dei pantaloni del completo."}, {"f": "Le iene", "y": "1992", "s": "IMDb", "t": "Senza soldi per bloccare il traffico, la scena in cui Mr. Pink ruba un'auto si poteva girare solo con il semaforo verde."}, {"f": "Le iene", "y": "1992", "s": "IMDb", "t": "Madonna non condivideva la lettura di «Like a Virgin» data nel film, ma regalò a Tarantino un suo album autografato."}, {"f": "Le iene", "y": "1992", "s": "IMDb", "t": "Giacca e pantaloni di Michael Madsen, Mr. Blonde, vengono da due completi diversi."}, {"f": "Pulp Fiction", "y": "1994", "s": "IMDb", "t": "Costò circa 8 milioni di dollari, 5 dei quali per il cast, e ne incassò più di 200."}, {"f": "Pulp Fiction", "y": "1994", "s": "IMDb", "t": "Uma Thurman all'inizio rifiutò la parte di Mia: Tarantino la convinse leggendole il copione al telefono."}, {"f": "Pulp Fiction", "y": "1994", "s": "IMDb", "t": "La Chevelle Malibu di Vincent era l'auto di Tarantino: fu rubata durante le riprese e ritrovata dalla polizia solo nel 2013."}, {"f": "Pulp Fiction", "y": "1994", "s": "IMDb", "t": "Vincent Vega è il fratello di Mr. Blonde delle Iene. Il film sui due, «Double V Vega», non si è mai fatto."}, {"f": "Pulp Fiction", "y": "1994", "s": "IMDb", "t": "Il cameriere vestito da Buddy Holly al Jack Rabbit Slim's è Steve Buscemi, il Mr. Pink delle Iene."}, {"f": "Pulp Fiction", "y": "1994", "s": "IMDb", "t": "Tarantino scrisse il copione ad Amsterdam: per questo Vincent racconta dell'Olanda all'inizio del film."}, {"f": "Pulp Fiction", "y": "1994", "s": "IMDb", "t": "A Uma Thurman non piaceva la canzone della gara di twist. Tarantino le chiese di fidarsi: era perfetta."}, {"f": "Jackie Brown", "y": "1997", "s": "Wikipedia", "t": "Il film viene dal romanzo «Rum Punch» di Elmore Leonard, dove la protagonista era bianca e si chiamava Jackie Burke."}, {"f": "Jackie Brown", "y": "1997", "s": "Wikipedia", "t": "Pam Grier aveva fatto il provino per Pulp Fiction, per la parte di Jody."}, {"f": "Jackie Brown", "y": "1997", "s": "Wikipedia", "t": "Il film omaggia la blaxploitation anni Settanta, come Coffy e Foxy Brown: due film proprio con Pam Grier."}, {"f": "Jackie Brown", "y": "1997", "s": "Wikipedia", "t": "Per Max Cherry, Tarantino pensò a Paul Newman e Gene Hackman. La parte andò a Robert Forster, che fu candidato all'Oscar."}, {"f": "Jackie Brown", "y": "1997", "s": "Wikipedia", "t": "L'apertura in aeroporto ricalca quella del Laureato, sulle note di «Across 110th Street» di Bobby Womack."}, {"f": "Jackie Brown", "y": "1997", "s": "IMDb", "t": "Michael Keaton è lo stesso agente Ray Nicolette che interpreta in Out of Sight, anche quello tratto da Elmore Leonard."}, {"f": "Jackie Brown", "y": "1997", "s": "IMDb", "t": "Costò 12 milioni di dollari e ne incassò quasi 40."}, {"f": "Kill Bill: Volume 1", "y": "2003", "s": "IMDb", "t": "Doveva essere un unico film, ma superava le quattro ore: Tarantino lo divise in due volumi."}, {"f": "Kill Bill: Volume 1", "y": "2003", "s": "IMDb", "t": "Uma Thurman doveva dire «atrofia» ma disse «entropia». L'errore piacque alla troupe e rimase nel film."}, {"f": "Kill Bill: Volume 1", "y": "2003", "s": "IMDb", "t": "Tarantino ha un cameo da morto: è uno degli 88 Folli a terra, con la maschera alla Kato."}, {"f": "Kill Bill: Volume 1", "y": "2003", "s": "IMDb", "t": "Il duello nella neve alla Casa delle Foglie Blu è un omaggio a Lady Snowblood, film che ha ispirato molto Kill Bill."}, {"f": "Kill Bill: Volume 1", "y": "2003", "s": "IMDb", "t": "Il motivo che fischietta Elle Driver viene dal thriller inglese Twisted Nerve."}, {"f": "Kill Bill: Volume 1", "y": "2003", "s": "IMDb", "t": "I titoli di testa scorrono su «Bang Bang (My Baby Shot Me Down)» cantata da Nancy Sinatra."}, {"f": "Kill Bill: Volume 2", "y": "2004", "s": "IMDb", "t": "Robert Rodriguez scrisse la musica per un dollaro. Tarantino ricambiò dirigendo una scena di Sin City, sempre per un dollaro."}, {"f": "Kill Bill: Volume 2", "y": "2004", "s": "IMDb", "t": "Il ruolo di Bill fu offerto a Warren Beatty, che rifiutò e suggerì David Carradine."}, {"f": "Kill Bill: Volume 2", "y": "2004", "s": "IMDb", "t": "La tanica di benzina nella roulotte di Budd è la stessa che usa Mr. Blonde nelle Iene. Entrambi sono Michael Madsen."}, {"f": "Kill Bill: Volume 2", "y": "2004", "s": "IMDb", "t": "Il colpo a tre pollici di Pai Mei omaggia il famoso pugno da un pollice di Bruce Lee."}, {"f": "Kill Bill: Volume 2", "y": "2004", "s": "IMDb", "t": "«Black Mamba», il nome in codice della Sposa, è l'anagramma di «Mama Lack BB»: un riferimento alla figlia B.B."}, {"f": "Kill Bill: Volume 2", "y": "2004", "s": "IMDb", "t": "Nei due volumi, animazione esclusa, ogni cattivo ucciso in scena muore per mano di una donna."}, {"f": "Kill Bill: Volume 2", "y": "2004", "s": "IMDb", "t": "Esteban doveva essere Ricardo Montalbán, ma Michael Parks lesse le battute a una prova e Tarantino gli diede la parte."}, {"f": "A prova di morte", "y": "2007", "s": "IMDb", "t": "Zoë Bell interpreta se stessa e gira tutti i suoi stunt. Era la controfigura di Uma Thurman in Kill Bill."}, {"f": "A prova di morte", "y": "2007", "s": "IMDb", "t": "L'idea nacque parlando con un amico di auto: Tarantino voleva una Volvo per non morire in un incidente come in Pulp Fiction."}, {"f": "A prova di morte", "y": "2007", "s": "IMDb", "t": "L'amico disse che uno stuntman poteva rendere «a prova di morte» qualsiasi auto per 10-15 mila dollari. Il titolo è nato così."}, {"f": "A prova di morte", "y": "2007", "s": "IMDb", "t": "La chiacchierata delle ragazze alla tavola calda, nella seconda parte, è un unico piano sequenza di circa sette minuti."}, {"f": "A prova di morte", "y": "2007", "s": "IMDb", "t": "Il film era metà del doppio programma Grindhouse: l'altra metà era Planet Terror di Robert Rodriguez."}, {"f": "Bastardi senza gloria", "y": "2009", "s": "IMDb", "t": "Tarantino stava per abbandonare il film: temeva che Hans Landa fosse impossibile da interpretare, finché non arrivò Christoph Waltz."}, {"f": "Bastardi senza gloria", "y": "2009", "s": "IMDb", "t": "Solo il 30% circa del film è parlato in inglese: il resto è soprattutto francese e tedesco."}, {"f": "Bastardi senza gloria", "y": "2009", "s": "IMDb", "t": "Christoph Waltz vinse l'Oscar come attore non protagonista: il primo Oscar per la recitazione in un film di Tarantino."}, {"f": "Bastardi senza gloria", "y": "2009", "s": "IMDb", "t": "Nel film Landa parla quattro lingue: inglese, francese, tedesco e italiano."}, {"f": "Bastardi senza gloria", "y": "2009", "s": "IMDb", "t": "Il primo nome per Landa era Leonardo DiCaprio, ma Tarantino volle un attore di madrelingua tedesca."}, {"f": "Bastardi senza gloria", "y": "2009", "s": "IMDb", "t": "Per prepararsi, Mélanie Laurent lavorò come proiezionista al New Beverly Cinema, il cinema di Tarantino a Los Angeles."}, {"f": "Bastardi senza gloria", "y": "2009", "s": "IMDb", "t": "Alla fine di ogni ciak gli attori salutavano in camera la montatrice: «Hello Sally!»."}, {"f": "Django Unchained", "y": "2012", "s": "IMDb", "t": "Durante la cena DiCaprio si tagliò davvero la mano su un bicchiere e restò nel personaggio: quella ripresa è nel film."}, {"f": "Django Unchained", "y": "2012", "s": "IMDb", "t": "Jamie Foxx cavalca il suo vero cavallo, che si chiama Cheetah."}, {"f": "Django Unchained", "y": "2012", "s": "IMDb", "t": "Tarantino aveva scritto Django pensando a Will Smith, che poi rinunciò."}, {"f": "Django Unchained", "y": "2012", "s": "IMDb", "t": "Christoph Waltz si fece male al bacino durante l'addestramento: per questo il dottor Schultz viaggia su un carro."}, {"f": "Django Unchained", "y": "2012", "s": "IMDb", "t": "Franco Nero, il Django originale del 1966, fa un cameo nel film."}, {"f": "Django Unchained", "y": "2012", "s": "IMDb", "t": "Per Tarantino, Django e Broomhilda sono i trisavoli di John Shaft."}, {"f": "Django Unchained", "y": "2012", "s": "IMDb", "t": "Con 130 giorni di riprese è il set più lungo di Tarantino per un singolo film."}, {"f": "The Hateful Eight", "y": "2015", "s": "Wikipedia", "t": "La sceneggiatura finì online nel 2014 e Tarantino pensò di pubblicarla come romanzo invece di girarla."}, {"f": "The Hateful Eight", "y": "2015", "s": "Wikipedia", "t": "Fu girato in pellicola 65 mm in Ultra Panavision 70: un centinaio di cinema nel mondo installarono proiettori apposta."}, {"f": "The Hateful Eight", "y": "2015", "s": "Wikipedia", "t": "Ennio Morricone scrisse la colonna sonora senza aver visto il film e vinse l'Oscar."}, {"f": "The Hateful Eight", "y": "2015", "s": "Wikipedia", "t": "Kurt Russell distrusse una rara chitarra Martin dell'Ottocento prestata da un museo: nessuno gli aveva detto che era autentica."}, {"f": "The Hateful Eight", "y": "2015", "s": "Wikipedia", "t": "Daisy Domergue andò a Jennifer Jason Leigh dopo il rifiuto di Jennifer Lawrence. Per quel ruolo Leigh fu candidata all'Oscar."}, {"f": "The Hateful Eight", "y": "2015", "s": "Wikipedia", "t": "La versione roadshow, con ouverture e intervallo, dura 187 minuti."}, {"f": "C'era una volta a… Hollywood", "y": "2019", "s": "IMDb", "t": "La Cadillac di Rick Dalton è la stessa di Mr. Blonde nelle Iene: era l'auto personale di Michael Madsen."}, {"f": "C'era una volta a… Hollywood", "y": "2019", "s": "IMDb", "t": "Tarantino ha un cameo come regista dello spot delle sigarette Red Apple, ma se ne sente solo la voce."}, {"f": "C'era una volta a… Hollywood", "y": "2019", "s": "IMDb", "t": "La musica d'apertura viene da Hell River, film di guerra del 1974."}, {"f": "C'era una volta a… Hollywood", "y": "2019", "s": "IMDb", "t": "Un'inquadratura di Hell River è montata accanto a Rick Dalton col lanciafiamme, come se fossero lo stesso film."}, {"f": "C'era una volta a… Hollywood", "y": "2019", "s": "IMDb", "t": "Il western Lancer che gira Rick è ispirato al vero episodio pilota della serie, «The High Riders»."}, {"f": "C'era una volta a… Hollywood", "y": "2019", "s": "IMDb", "t": "Samuel L. Jackson non è nel film, come non era nelle Iene e in A prova di morte. Per Le iene aveva anche fatto un provino."}];
+const V = ["Violenza","Sangue freddo","Dialogo","Stile","Vendetta"];
+const POWER_TXT = {
+  "Fuori sequenza":"Prendi una carta a scelta tra quelle vinte dall'avversario.",
+  "Resa dei conti":"Si combatte ancora: ognuno gioca un'altra carta dalla mano nella stessa voce. Chi vince prende tutte e 4.",
+  "Sono uno sbirro":"Finisce tra le carte vinte dall'avversario, ma per lui vale −2.",
+  "Stallo alla messicana":"Ognuno rivela una carta dalla mano: con la Quota più alta la scena è tua."
+};
+const POWER_TXT_T = {
+  "Fuori sequenza":"Prendi un passo da un tracciato dell'avversario e lo aggiungi al tuo, nella stessa voce.",
+  "Resa dei conti":"Si combatte ancora: ognuno gioca un'altra carta nella stessa voce. Chi vince avanza di un passo in più.",
+  "Sono uno sbirro":"Chi lo vince non avanza: arretra di un passo su un suo tracciato.",
+  "Stallo alla messicana":"Ognuno rivela una carta dalla mano: con la Quota più alta la scena è tua.",
+  "Riscrivere la storia":"Sposta un passo da un tuo tracciato a un altro, a tua scelta.",
+  "Catene spezzate":"La prossima scena che vinci ti fa avanzare di un passo in più.",
+  "Risolvo problemi":"La scena si annulla: chi l'ha vinta non avanza."
+};
+const SHORT_T = {"Fuori sequenza":"Rubi un passo all'avversario, nella stessa voce.","Resa dei conti":"Altro duello nella voce: chi vince avanza di 1 in più.","Sono uno sbirro":"Chi vince non avanza: arretra di 1.","Stallo alla messicana":"Vince la Quota più alta tra due carte dalla mano.","Riscrivere la storia":"Sposti un passo da un tracciato a un altro.","Catene spezzate":"La prossima scena vinta vale +1 passo.","Risolvo problemi":"Scena annullata: nessuno avanza."};
+const SHORT_C = {"Fuori sequenza":"Prendi una carta vinta dall'avversario.","Resa dei conti":"Altro duello: chi vince prende tutte e 4.","Sono uno sbirro":"Per l'avversario vale −2.","Stallo alla messicana":"Vince la Quota più alta tra due carte dalla mano."};
+const powerShort = p => (isT() ? SHORT_T : SHORT_C)[p] || powerTxt(p);
+const NEWP = ["Riscrivere la storia","Catene spezzate","Risolvo problemi"];
+const isT = () => (S ? S.mode : OPTS.mode) === "tracciati";
+const powerTxt = p => (isT() ? POWER_TXT_T : POWER_TXT)[p];
+const PW = id => { const p = CARDS[id].power; return p && (isT() || !NEWP.includes(p)) ? p : null; };
+const POWER_EV = {"Fuori sequenza":0.9,"Resa dei conti":0.7,"Sono uno sbirro":0.6,"Stallo alla messicana":0.8};
+const COLOR_NAME = {R:"rosso", G:"giallo"};
+const NAMES = ["Samuel L. Jackson","Uma Thurman","John Travolta","Christoph Waltz","Tim Roth","Harvey Keitel","Michael Madsen","Steve Buscemi","Pam Grier","Kurt Russell","Jamie Foxx","Lucy Liu","Brad Pitt","Leonardo DiCaprio","Bruce Willis","Zoë Bell","Diane Kruger","Michael Fassbender","Robert Forster","Kerry Washington","Margot Robbie","Lawrence Bender"];
+const randName = (not) => { const l = NAMES.filter(n=>n!==not); return l[Math.floor(Math.random()*l.length)]; };
+const NM = k => esc(S && S.names ? S.names[k] : (k==="you" ? "Tu" : "Computer"));
+const CIAK = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 5.5h10V11H1z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M1 5.5 2 2l9.2 1.6-.3 1.9" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>';
+
+const C = id => CARDS[id];
+const peak = id => C(id).letters.indexOf("A");
+const pts = id => PW(id) ? 2 : 1;
+const other = k => k === "you" ? "ai" : "you";
+function strength(id){ const s=[...C(id).stats].sort((a,b)=>b-a); return 0.55*s[0]+0.45*s[1]; }
+function beats(a,b,v){ const va=C(a).stats[v], vb=C(b).stats[v]; return va>vb || (va===vb && C(a).quota>C(b).quota); }
+function shuffle(a){ a=[...a]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; }
+function esc(s){ return String(s).replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch])); }
+function cardPts(id){ return S && S.poison && S.poison.includes(id) ? -2 : pts(id); }
+function tBonus(t, ex){ return Math.min(...t.filter((_,j)=>j!==ex)); }
+function tScore(t, ex){ const v = t.filter((_,j)=>j!==ex).sort((a,b)=>a-b); return v[0]+v[1]+v[2]+v[0]; }
+function score(k){ return isT() ? tScore(S.T[k], S.ex) : S.P[k].won.reduce((t,id)=>t+cardPts(id),0); }
+function tTotal(k){ return S.T[k].reduce((a,b)=>a+b,0); }
+function gain(k, v, d=1){ const t=[...S.T[k]]; const b=tScore(t,S.ex); t[v]=Math.max(0,t[v]+d); return tScore(t,S.ex)-b; }
+
+/* ---------------- storage, stats, save code ---------------- */
+const KEY_STATS = "killquentin.stats.v2", KEY_OPTS = "killquentin.opts.v1", PREFIX = "KQN1-";
+const emptyRow = () => ({w:0,l:0,d:0});
+const emptyStats = () => ({col:{R:emptyRow(),G:emptyRow()}, lvl:{normale:emptyRow(),difficile:emptyRow()}, mode:{tracciati:emptyRow(),classica:emptyRow()}});
+function load(key, fb){ try{ const v = localStorage.getItem(key); return v ? JSON.parse(v) : fb; }catch(e){ return fb; } }
+function save(key, val){ try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){} }
+let STATS = load(KEY_STATS, null) || emptyStats();
+let OPTS = Object.assign({color:"R", diff:"difficile", mode:"tracciati", name:"", cname:""}, load(KEY_OPTS, {}));
+if(!OPTS.name){ OPTS.name = randName(); save(KEY_OPTS, OPTS); }
+const SUGG = [...NAMES].sort(()=>Math.random()-.5).slice(0,5);
+function totalRow(){ const t=emptyRow(); for(const k of ["R","G"]) for(const f of ["w","l","d"]) t[f]+=STATS.col[k][f]; return t; }
+function migrate(st){ // games played before the two modes existed were all "classica"
+  if(!st.mode){ st.mode = {tracciati:emptyRow(), classica:emptyRow()}; const t=emptyRow();
+    for(const k of ["R","G"]) for(const f of ["w","l","d"]) t[f]+=st.col[k][f]; st.mode.classica = t; }
+  return st;
+}
+STATS = migrate(STATS); save(KEY_STATS, STATS);
+function recordResult(res){
+  if(S.recorded) return; S.recorded = true;
+  if(S.tutorial) return;
+  const f = res>0 ? "w" : res<0 ? "l" : "d";
+  STATS.col[S.color][f]++; STATS.lvl[S.diff][f]++; STATS.mode[S.mode||"classica"][f]++; save(KEY_STATS, STATS);
+}
+function encodeCode(){
+  const json = JSON.stringify({v:1, s:STATS, o:{color:OPTS.color, diff:OPTS.diff, mode:OPTS.mode}});
+  return PREFIX + btoa(unescape(encodeURIComponent(json))).replace(/=+$/,"");
+}
+function decodeCode(raw){
+  let s = String(raw||"").replace(/\s+/g,"");
+  if(!s.startsWith(PREFIX)) return null;
+  s = s.slice(PREFIX.length); while(s.length%4) s+="=";
+  let o; try{ o = JSON.parse(decodeURIComponent(escape(atob(s)))); }catch(e){ return null; }
+  if(!o || o.v!==1 || !o.s) return null;
+  const okN = n => Number.isInteger(n) && n>=0 && n<1e6;
+  const out = emptyStats();
+  for(const [grp,keys] of [["col",["R","G"]],["lvl",["normale","difficile"]]]){
+    for(const k of keys){ const r=o.s[grp]&&o.s[grp][k]; if(!r) return null;
+      for(const f of ["w","l","d"]){ if(!okN(r[f])) return null; out[grp][k][f]=r[f]; } }
+  }
+  if(o.s.mode){ for(const k of ["tracciati","classica"]){ const r=o.s.mode[k]; if(!r) return null;
+      for(const f of ["w","l","d"]){ if(!okN(r[f])) return null; out.mode[k][f]=r[f]; } } }
+  else { delete out.mode; migrate(out); }
+  const opts = {};
+  if(o.o){ if(["R","G","X"].includes(o.o.color)) opts.color=o.o.color; if(["normale","difficile"].includes(o.o.diff)) opts.diff=o.o.diff; if(["tracciati","classica"].includes(o.o.mode)) opts.mode=o.o.mode; }
+  return {stats:out, opts};
+}
+
+/* ---------------- game state ---------------- */
+let S = null;      // current game
+let VIEW = "home"; // home | rules | stats | game
+let UI = {sel:null, voce:null, sheet:null, msg:"", confirmReset:false, picked:[]};
+
+function pickTrivia(){
+  let recent = load("killquentin.trivia.v1", []); if(!Array.isArray(recent)) recent = [];
+  const free = TRIVIA.map((_,i)=>i).filter(i=>!recent.includes(i));
+  const i = free[Math.floor(Math.random()*free.length)];
+  recent = [...recent, i].slice(-Math.min(30, TRIVIA.length-1)); save("killquentin.trivia.v1", recent);
+  return i;
+}
+/* ---- tutorial: una partita scritta, con carte e scelte obbligate ---- */
+const TUT = {
+  ex:3, you:[0,2,11,15,8,1,7,3,12], ai:[20,18,25,22,19,33,29,23,17],
+  rip:{you:[29,19,25], ai:[7,8,11]},
+  sc:[
+    {must:{card:0, voce:1}, aiResp:20, discard:11, aiDisc:25},
+    {aiOpen:[18,1], must:{card:2}, discard:8, aiDisc:19},
+    {must:{card:15, voce:0}, aiResp:22, discard:7, aiDisc:29},
+    {aiOpen:[33,1], must:{card:12}, stallo:1},
+    {must:{card:3, voce:4}, aiResp:17},
+    {free:true}
+  ]
+};
+const sEntry = () => S && S.script ? S.script[(S.phase-1)*S.nS + S.scene-1] : null;
+function blocked(id){ // carta non scelta nella scena scritta
+  const e = sEntry(); if(!e) return false;
+  if(S.step==="open"||S.step==="respond") return e.must ? e.must.card!==id : false;
+  if(S.step==="discard") return e.discard!=null ? e.discard!==id : false;
+  if(S.step==="reveal" && S.pending.length && S.pending[0].type==="stallo") return e.stallo!=null ? e.stallo!==id : false;
+  return false;
+}
+function newGame(kind){
+  const tutorial = !!kind;
+  const color = tutorial ? "R" : OPTS.color==="X" ? (Math.random()<.5?"R":"G") : OPTS.color;
+  const ai = color==="R" ? "G" : "R";
+  const deck = c => shuffle(CARDS.filter(x=>x.deck===c).map(x=>x.id));
+  S = {color, aiColor:ai, diff:OPTS.diff, phase:1, scene:1, opener: Math.random()<.5 ? "you":"ai",
+       P:{ you:{agenda:deck(color),hand:[],won:[],rif:[],lista:0}, ai:{agenda:deck(ai),hand:[],won:[],rif:[],lista:0} },
+       out:[], history:[], step:null, cur:null, pending:[], events:[], recorded:false, result:null, firstOpener:null, used:[], poison:[],
+       tutorial, tips:{}, trivia: pickTrivia(), showTrivia: true, nS: 7,
+       names:{you:(OPTS.name||"").trim()||"Tu", ai:(OPTS.cname||"").trim()||randName((OPTS.name||"").trim())},
+       mode: kind==="tut" ? "tracciati" : kind==="guided" ? "classica" : OPTS.mode==="classica" ? "classica" : "tracciati", ex: kind==="tut" ? TUT.ex : Math.floor(Math.random()*5), T:{you:[0,0,0,0,0], ai:[0,0,0,0,0]}, ciakLeft:{you:1,ai:1}, chain:{you:false,ai:false}};
+  if(kind==="tut"){
+    S.diff = "difficile"; S.opener = "you"; S.showTrivia = false; S.nS = 3; S.script = TUT.sc;
+    S.names.ai = S.names.ai===S.names.you ? randName(S.names.you) : S.names.ai;
+    for(const [k,deck] of [["you","R"],["ai","G"]]){
+      const L = TUT[k]; const rest = shuffle(CARDS.filter(x=>x.deck===deck && !L.includes(x.id)).map(x=>x.id));
+      S.P[k].agenda = rest.concat([...L].reverse());
+    }
+  } else if(kind==="guided"){
+    S.diff = "normale"; S.opener = "you";
+    const want = ["Bill","Mr. Blonde","Cliff Booth"].map(n=>CARDS.find(c=>c.name===n).id);
+    S.P.you.agenda = S.P.you.agenda.filter(id=>!want.includes(id)).concat(want);
+  }
+  for(const k of ["you","ai"]) for(let i=0;i<3;i++) S.P[k].hand.push(S.P[k].agenda.pop());
+  S.firstOpener = S.opener;
+  startScene();
+  VIEW = "game";
+}
+function allowed(){ if(isT()) return [0,1,2,3,4].filter(v=>v!==S.ex); if(S.used.length>=5) S.used = []; return [0,1,2,3,4].filter(v=>!S.used.includes(v)); }
+function ciakOK(k){ return isT() && S.phase===2 && S.ciakLeft && S.ciakLeft[k]>0 && !(S.script && k==="ai"); }
+function canOpen(k){ const al = allowed(); return S.P[k].hand.some(id=>al.some(v=>v!==peak(id))); }
+function startScene(){
+  UI.sel = null; UI.voce = null; UI.picked = []; S.events = []; S.pending = [];
+  if(!S.P.you.hand.length || !S.P.ai.hand.length){ S.cur = null; nextScene(); return; }
+  allowed();
+  if(S.opener==="you"){ S.step = canOpen("you") ? "open" : "gift"; }
+  else if(!canOpen("ai")){
+    const g = S.P.ai.hand.reduce((a,b)=> (PW(b)?44:strength(b)) < (PW(a)?44:strength(a)) ? b : a);
+    move(S.P.ai.hand, S.P.you.won, g); S.cur = null; S.lastGift = {from:"ai", id:g}; S.step = "giftinfo";
+  }
+  else { const [id,v] = aiOpen(); S.cur = {opener:"ai", aiCard:id, voce:v}; S.step = "respond"; }
+}
+function doGift(){ const g = UI.sel; move(S.P.you.hand, S.P.ai.won, g); S.lastGift = {from:"you", id:g}; S.cur = null; UI.sel = null; afterReveal(); }
+function drawUp(k){ const p=S.P[k]; while(p.hand.length<3 && p.agenda.length) p.hand.push(p.agenda.pop()); }
+
+/* ---------------- AI ---------------- */
+function aiPool(){
+  const seen = new Set([...S.P.ai.hand, ...S.P.you.won, ...S.P.ai.won, ...S.out]);
+  if(S.phase===1){ S.P.you.rif.forEach(i=>seen.add(i)); S.P.ai.rif.forEach(i=>seen.add(i));
+    return CARDS.filter(c=>c.deck===S.color && !seen.has(c.id)).map(c=>c.id); }
+  S.P.ai.agenda.forEach(i=>seen.add(i));
+  return CARDS.filter(c=>!seen.has(c.id)).map(c=>c.id);
+}
+function aiOpen(){
+  const h = S.P.ai.hand;
+  { const e = sEntry(); if(e && e.aiOpen) return e.aiOpen; }
+  if(S.diff==="normale"){
+    const al = allowed(); const legal = h.filter(i=>al.some(v=>v!==peak(i)));
+    const pick = legal[Math.floor(Math.random()*legal.length)];
+    const order = al.filter(v=>v!==peak(pick)).sort((a,b)=>C(pick).stats[b]-C(pick).stats[a]);
+    return [pick, Math.random()<.6 ? order[0] : order[Math.floor(Math.random()*order.length)]];
+  }
+  const pool = aiPool(), n = Math.max(1, S.P.you.hand.length);
+  let best = null;
+  if(isT()){
+    for(const id of h) for(const v of allowed()){
+      if(v===peak(id)) continue;
+      const q = Math.pow(pool.length ? pool.filter(j=>beats(id,j,v)).length/pool.length : 0.5, n);
+      const sc = q*gain("ai",v) - (1-q)*gain("you",v) + 0.15*q - 0.2*strength(id)/50 + (PW(id)?0.1:0);
+      if(!best || sc>best[0]) best=[sc,id,v];
+    }
+    if(ciakOK("ai")){
+      const extra = Math.max(...[0,1,2,3,4].filter(k=>k!==S.ex).map(k=>gain("you",k)));
+      for(const id of h){
+        const v = peak(id); if(v===S.ex) continue;
+        const q = Math.pow(pool.length ? pool.filter(j=>beats(id,j,v)).length/pool.length : 0.5, n);
+        const sc = q*(gain("ai",v)-0.15) - (1-q)*(gain("you",v)+extra) + 0.15*q - 0.2*strength(id)/50 - 0.1 + (PW(id)?0.1:0);
+        if(sc>best[0]) best=[sc,id,v];
+      }
+    }
+    return [best[1], best[2]];
+  }
+  const consider = (sc,id,v)=>{ if(!best || sc>best[0]) best=[sc,id,v]; };
+  for(const id of h){
+    const c = C(id);
+    if(PW(id)){
+      let sc = POWER_EV[PW(id)]*0.45;
+      if(PW(id)==="Fuori sequenza" && !S.P.you.won.length) sc = 0.05;
+      const v = allowed().filter(v=>v!==peak(id)).sort((a,b)=>c.stats[a]-c.stats[b])[0];
+      if(v!==undefined) consider(sc,id,v);
+    }
+    for(const v of allowed()){
+      if(v===peak(id)) continue;
+      const q = pool.length ? pool.filter(j=>beats(id,j,v)).length/pool.length : 0.5;
+      consider(Math.pow(q,n) - 0.25*strength(id)/50, id, v);
+    }
+  }
+  return [best[1], best[2]];
+}
+function aiRespond(v){
+  const h = S.P.ai.hand;
+  { const e = sEntry(); if(e && e.aiResp!=null) return e.aiResp; }
+  if(S.diff==="normale"){
+    if(Math.random()<.5) return h.reduce((a,b)=>C(b).stats[v]>C(a).stats[v]?b:a);
+    return h[Math.floor(Math.random()*h.length)];
+  }
+  const pool = aiPool();
+  const vals = pool.filter(j=>peak(j)!==v).map(j=>C(j).stats[v]).sort((a,b)=>a-b);
+  const thr = vals.length ? vals[Math.min(vals.length-1, Math.floor(vals.length*.8))] : 30;
+  const winners = h.filter(i=>C(i).stats[v]>thr);
+  const stake = isT() ? gain("ai",v)+gain("you",v) : 1;
+  if(winners.length && stake>0) return winners.reduce((a,b)=> (C(b).stats[v]<C(a).stats[v] || (C(b).stats[v]===C(a).stats[v] && C(b).quota<C(a).quota)) ? b : a);
+  const pw = h.filter(i=>PW(i));
+  if(pw.length) return pw[0];
+  return h.reduce((a,b)=> weak(b)<weak(a) ? b : a);
+}
+function weak(id){ return strength(id) + (S.phase===2 ? 0.4*C(id).quota : 0); }
+function aiDiscard(){
+  const h = S.P.ai.hand;
+  { const e = sEntry(); if(e && e.aiDisc!=null) return e.aiDisc; }
+  if(S.diff==="normale") return h[Math.floor(Math.random()*h.length)];
+  return h.reduce((a,b)=> (PW(b)?44:strength(b)) < (PW(a)?44:strength(a)) ? b : a);
+}
+function aiBestSteal(pile){ return pile.reduce((a,b)=> (cardPts(b)*100+C(b).quota) > (cardPts(a)*100+C(a).quota) ? b : a); }
+function aiHighQuota(h){ return h.reduce((a,b)=> C(b).quota>C(a).quota ? b : a); }
+
+/* ---------------- scene resolution ---------------- */
+function playOpen(){
+  const id = UI.sel, v = UI.voce;
+  S.P.you.hand = S.P.you.hand.filter(x=>x!==id);
+  const r = aiRespond(v);
+  S.P.ai.hand = S.P.ai.hand.filter(x=>x!==r);
+  resolve("you", id, r, v);
+}
+function playRespond(){
+  const id = UI.sel;
+  S.P.you.hand = S.P.you.hand.filter(x=>x!==id);
+  S.P.ai.hand = S.P.ai.hand.filter(x=>x!==S.cur.aiCard);
+  resolve("ai", S.cur.aiCard, id, S.cur.voce);
+}
+function resolve(opener, oCard, rCard, v){
+  const resp = other(opener);
+  const tieAll = C(oCard).stats[v]===C(rCard).stats[v] && C(oCard).quota===C(rCard).quota;
+  const w = isT() ? (beats(rCard, oCard, v) ? resp : opener) : (beats(oCard, rCard, v) ? opener : resp);
+  const l = other(w);
+  const ciak = isT() && v===peak(oCard);
+  if(ciak) S.ciakLeft[opener]--;
+  const card = {}; card[opener]=oCard; card[resp]=rCard;
+  const vo = C(oCard).stats[v], vr = C(rCard).stats[v];
+  let why;
+  if(vo!==vr) why = `${V[v]}: ${vo} contro ${vr}.`;
+  else if(C(oCard).quota!==C(rCard).quota) why = `${V[v]}: ${vo} pari. Decide la Quota: ${C(card.you).quota} contro ${C(card.ai).quota}.`;
+  else why = `${V[v]}: ${vo} pari e anche la Quota è pari. Vince chi ${isT()?"apre":"risponde"}.`;
+  S.P[w].won.push(oCard, rCard);
+  S.used.push(v);
+  S.cur = {opener, voce:v, you:card.you, ai:card.ai, winner:w, why, flipped:false, ciak};
+  S.events = []; S.pending = [];
+  const lc = card[l], pw = PW(lc);
+  if(isT()){
+    S.history.push({phase:S.phase, scene:S.scene, voce:v, you:card.you, ai:card.ai, winner:w});
+    S.step = "reveal";
+    let step = (PW(oCard) || PW(rCard)) ? 2 : 1;
+    if(ciak) S.events.push(`<b>Ruolo cucito addosso</b> ${opener==="you"?"Apri":`${NM('ai')} apre`} con la voce col ciak di ${esc(C(oCard).name)}: ${V[v]}.`);
+    if(pw==="Sono uno sbirro"){
+      S.cur.adv = null;
+      const opts = [0,1,2,3,4].filter(k=>k!==S.ex && S.T[w][k]>0);
+      if(!opts.length) S.events.push(`<b>Sono uno sbirro</b> Mr. Orange era uno sbirro: ${w==="you"?"non avanzi":`${NM('ai')} non avanza`}, e non ha passi da perdere.`);
+      else if(w==="ai"){ const k = opts.reduce((a,b)=> gain("ai",b,-1)>gain("ai",a,-1)?b:a); S.T.ai[k]--; S.events.push(`<b>Sono uno sbirro</b> Mr. Orange era uno sbirro: ${NM('ai')} non avanza e arretra di un passo in ${V[k]}.`); }
+      else S.pending.push({type:"sbirro"});
+      finishT(); return;
+    }
+    if(pw==="Risolvo problemi"){
+      S.cur.adv = null;
+      S.events.push(`<b>Risolvo problemi</b> Winston Wolf ripulisce la scena: ${w==="you"?"non avanzi":`${NM('ai')} non avanza`}.`);
+      finishT(); return;
+    }
+    if(S.chain[w]){ step++; S.chain[w] = false; S.events.push(`<b>Catene spezzate</b> ${w==="you"?"Hai":`${NM('ai')} ha`} una scena in più da vendicare: ${w==="you"?"avanzi":"avanza"} di un passo extra.`); }
+    S.T[w][v] += step; S.cur.adv = {k:w, v, n:step};
+    if(pw==="Fuori sequenza"){
+      if(l==="ai"){ const opts=[0,1,2,3,4].filter(k=>k!==S.ex && S.T.you[k]>0);
+        if(opts.length){ const k = opts.reduce((a,b)=> (gain("ai",b)-gain("you",b,-1)) > (gain("ai",a)-gain("you",a,-1)) ? b : a); S.T.you[k]--; S.T.ai[k]++;
+          S.events.push(`<b>Fuori sequenza</b> Vincent Vega torna in scena: ${NM('ai')} ti prende un passo in ${V[k]}.`); } }
+      else S.pending.push({type:"fuori-t"});
+    } else if(pw==="Resa dei conti"){
+      if(S.P.you.hand.length && S.P.ai.hand.length) S.pending.push({type:"duello", loser:l});
+    } else if(pw==="Stallo alla messicana"){
+      if(S.P.you.hand.length && S.P.ai.hand.length) S.pending.push({type:"stallo", loser:l});
+    } else if(pw==="Riscrivere la storia"){
+      const live = [0,1,2,3,4].filter(k=>k!==S.ex);
+      if(l==="ai"){
+        let best = null;
+        for(const a of live){ if(S.T.ai[a]<=0) continue; for(const b of live){ if(a===b) continue;
+          const t = [...S.T.ai]; t[a]--; t[b]++; const g = tScore(t,S.ex)-tScore(S.T.ai,S.ex); if(g>0 && (!best||g>best[0])) best=[g,a,b]; } }
+        if(best){ S.T.ai[best[1]]--; S.T.ai[best[2]]++; S.events.push(`<b>Riscrivere la storia</b> ${esc(C(lc).name)} riscrive il copione: ${NM('ai')} sposta un passo da ${V[best[1]]} a ${V[best[2]]}.`); }
+        else S.events.push(`<b>Riscrivere la storia</b> ${esc(C(lc).name)} riscrive il copione, ma a ${NM('ai')} non conviene spostare nulla.`);
+      } else if(live.some(k=>S.T.you[k]>0)) S.pending.push({type:"riscrivi", from:null});
+      else S.events.push(`<b>Riscrivere la storia</b> Non hai ancora passi da spostare.`);
+    } else if(pw==="Catene spezzate"){
+      S.chain[l] = true;
+      S.events.push(`<b>Catene spezzate</b> ${esc(C(lc).name)} ha perso, ma ${l==="you"?"la tua prossima scena vinta vale":`la prossima scena vinta da ${NM('ai')} vale`} un passo in più.`);
+    }
+    finishT(); return;
+  }
+  // power of the losing card (classic)
+  if(pw){
+    if(pw==="Fuori sequenza"){
+      if(l==="ai"){ if(S.P.you.won.length){ const t=aiBestSteal(S.P.you.won); move(S.P.you.won,S.P.ai.won,t); S.events.push(`<b>Fuori sequenza</b> Vincent Vega torna in scena: ${NM('ai')} ti prende ${esc(C(t).name)}.`);} }
+      else if(S.P.ai.won.length) S.pending.push({type:"fuori"});
+    } else if(pw==="Resa dei conti"){
+      if(S.P.you.hand.length && S.P.ai.hand.length) S.pending.push({type:"duello", loser:l});
+      else S.events.push(`<b>Resa dei conti</b> Nessuno ha carte in mano: il duello non si fa.`);
+    } else if(pw==="Sono uno sbirro"){
+      S.poison.push(lc);
+      S.events.push(l==="ai" ? `<b>Sono uno sbirro</b> Mr. Orange era uno sbirro: è tra le tue carte vinte, ma per te vale −2.` : `<b>Sono uno sbirro</b> Mr. Orange era uno sbirro: finisce tra le carte vinte di ${NM('ai')} e per lui vale −2.`);
+    } else if(pw==="Stallo alla messicana"){
+      if(S.P.you.hand.length && S.P.ai.hand.length) S.pending.push({type:"stallo", loser:l});
+      else S.events.push(`<b>Stallo alla messicana</b> Nessuno ha carte in mano: lo stallo non scatta.`);
+    }
+  }
+  S.history.push({phase:S.phase, scene:S.scene, voce:v, you:card.you, ai:card.ai, winner:w});
+  S.step = "reveal";
+}
+function finishT(){ if(S.cur.ciak) S.pending.push({type:"ciak"}); autoPending(); }
+function autoPending(){
+  while(S.pending.length && S.pending[0].type==="ciak"){
+    const opener = S.cur.opener, w = S.cur.winner, r = other(opener);
+    if(w===opener){ // il ruolo ha funzionato: l'avversario può scambiare una carta della mano con una dei suoi scarti
+      const pile = S.P[r].agenda, hand = S.P[r].hand;
+      if(!pile.length || !hand.length){ S.events.push(`<b>Ruolo cucito addosso</b> ${opener==="you"?"Hai vinto":`${NM('ai')} ha vinto`}, ma ${r==="you"?"non hai":`${NM('ai')} non ha`} scarti da scambiare.`); S.pending.shift(); continue; }
+      if(r==="ai"){
+        const take = pile.reduce((a,b)=>strength(b)>strength(a)?b:a), give = hand.reduce((a,b)=>strength(b)<strength(a)?b:a);
+        if(strength(take)>strength(give)){ S.P.ai.agenda = shuffle([...pile.filter(x=>x!==take), give]); hand[hand.indexOf(give)] = take;
+          S.events.push(`<b>Ruolo cucito addosso</b> Hai vinto: ${NM('ai')} può scambiare e lo fa, una carta della sua mano con una dei suoi scarti.`); }
+        else S.events.push(`<b>Ruolo cucito addosso</b> Hai vinto: ${NM('ai')} può scambiare una carta con i suoi scarti, ma non gli conviene.`);
+        S.pending.shift(); continue;
+      }
+      S.pending[0] = {type:"ciak-swap"}; return;
+    } else { // il ruolo è andato male: l'avversario avanza anche su un tracciato a scelta
+      if(r==="ai"){
+        const live=[0,1,2,3,4].filter(k=>k!==S.ex), k = live.reduce((a,b)=>gain("ai",b)>gain("ai",a)?b:a);
+        S.T.ai[k]++; S.events.push(`<b>Ruolo cucito addosso</b> È andato male: ${NM('ai')} avanza anche di un passo in ${V[k]}.`); S.pending.shift(); continue;
+      }
+      S.pending[0] = {type:"ciak-bonus"}; return;
+    }
+  }
+}
+function move(from,to,id){ const i=from.indexOf(id); if(i>=0){ from.splice(i,1); to.push(id);} }
+function outFromWon(id, holder){ const p=S.P[holder].won, i=p.indexOf(id); if(i>=0){ p.splice(i,1); S.out.push(id);} }
+function swapHands(fromYou, fromAi){
+  const y=S.P.you.hand, a=S.P.ai.hand;
+  y.splice(y.indexOf(fromYou),1); a.splice(a.indexOf(fromAi),1); y.push(fromAi); a.push(fromYou);
+}
+function flipAdv(newW, extra=0){
+  const a = S.cur.adv; if(!a) return;
+  S.T[a.k][a.v] -= a.n; a.k = newW; a.n += extra; S.T[newW][a.v] += a.n;
+}
+function resolvePending(choice){
+  const p = S.pending[0];
+  if(p.type==="fuori-t"){
+    S.T.ai[choice]--; S.T.you[choice]++;
+    S.events.push(`<b>Fuori sequenza</b> Vincent Vega torna in scena: prendi un passo a ${NM('ai')} in ${V[choice]}.`);
+    S.pending.shift(); UI.picked = []; autoPending(); return;
+  }
+  if(p.type==="riscrivi"){
+    if(p.from===null){ p.from = choice; UI.picked = []; return; }
+    S.T.you[p.from]--; S.T.you[choice]++;
+    S.events.push(`<b>Riscrivere la storia</b> Sposti un passo da ${V[p.from]} a ${V[choice]}.`);
+    S.pending.shift(); UI.picked = []; autoPending(); return;
+  }
+  if(p.type==="ciak-bonus"){
+    S.T.you[choice]++;
+    S.events.push(`<b>Ruolo cucito addosso</b> È andato male a ${NM('ai')}: avanzi anche di un passo in ${V[choice]}.`);
+    S.pending.shift(); UI.picked = []; autoPending(); return;
+  }
+  if(p.type==="ciak-swap"){
+    if(choice){ const [take,give] = choice, y = S.P.you;
+      y.agenda = shuffle([...y.agenda.filter(x=>x!==take), give]); y.hand[y.hand.indexOf(give)] = take;
+      S.events.push(`<b>Ruolo cucito addosso</b> Scambi ${esc(C(give).name)} con ${esc(C(take).name)} dei tuoi scarti.`); }
+    else S.events.push(`<b>Ruolo cucito addosso</b> Non scambi nulla.`);
+    S.pending.shift(); UI.picked = []; autoPending(); return;
+  }
+  if(p.type==="sbirro"){
+    S.T.you[choice]--;
+    S.events.push(`<b>Sono uno sbirro</b> Mr. Orange era uno sbirro: non avanzi e arretri di un passo in ${V[choice]}.`);
+    S.pending.shift(); UI.picked = []; autoPending(); return;
+  }
+  if(p.type==="fuori"){
+    move(S.P.ai.won, S.P.you.won, choice);
+    S.events.push(`<b>Fuori sequenza</b> Vincent Vega torna in scena: prendi ${esc(C(choice).name)} da ${NM('ai')}.`);
+    S.pending.shift();
+  } else if(p.type==="duello"){
+    const v = S.cur.voce, l = p.loser, w = other(l);
+    const mine = choice, his = S.P.ai.hand.reduce((a,b)=> (C(b).stats[v]>C(a).stats[v] || (C(b).stats[v]===C(a).stats[v] && C(b).quota>C(a).quota)) ? b : a);
+    S.P.you.hand = S.P.you.hand.filter(x=>x!==mine); S.P.ai.hand = S.P.ai.hand.filter(x=>x!==his);
+    const dl = l==="you" ? mine : his, dw = l==="you" ? his : mine;
+    const lWins = beats(dl, dw, v);
+    let txt = `<b>Resa dei conti</b> Duello in ${V[v]}: tu giochi ${esc(C(mine).name)} (${C(mine).stats[v]}), ${NM('ai')} ${esc(C(his).name)} (${C(his).stats[v]}). `;
+    if(lWins){
+      for(const id of [S.cur.you, S.cur.ai]){ if(S.P[w].won.includes(id)) move(S.P[w].won, S.P[l].won, id); }
+      S.P[l].won.push(mine, his); S.cur.winner = l; S.cur.flipped = true; S.history[S.history.length-1].winner = l;
+      if(isT()){ flipAdv(l, 1); txt += l==="you" ? `Vinci il duello: la scena è tua e avanzi di ${S.cur.adv.n} in ${V[v]}.` : `${NM('ai')} vince il duello: la scena è sua e avanza di ${S.cur.adv.n} in ${V[v]}.`; }
+      else txt += l==="you" ? "Vinci il duello: prendi tutte e 4 le carte." : `${NM('ai')} vince il duello e prende tutte e 4 le carte.`;
+    } else {
+      S.P[w].won.push(mine, his);
+      if(isT()){ flipAdv(w, 1); txt += w==="you" ? `Vinci anche il duello: avanzi di ${S.cur.adv.n} in ${V[v]}.` : `${NM('ai')} vince anche il duello e avanza di ${S.cur.adv.n} in ${V[v]}.`; }
+      else txt += w==="you" ? "Vinci anche il duello: prendi tutte e 4 le carte." : `${NM('ai')} vince anche il duello e prende tutte e 4 le carte.`;
+    }
+    S.cur.duel = {you:mine, ai:his};
+    S.events.push(txt); S.pending.shift();
+  } else if(p.type==="stallo"){
+    const mine = choice, his = aiHighQuota(S.P.ai.hand);
+    const qa = C(mine).quota, qb = C(his).quota;
+    const l = p.loser, w = other(l);
+    const qL = l==="you" ? qa : qb, qW = l==="you" ? qb : qa;
+    let txt = `<b>Stallo alla messicana</b> Tu riveli ${esc(C(mine).name)} (Quota ${qa}), ${NM('ai')} ${esc(C(his).name)} (Quota ${qb}). `;
+    if(qL > qW){
+      for(const id of [S.cur.you, S.cur.ai]){ if(S.P[w].won.includes(id)) move(S.P[w].won, S.P[l].won, id); }
+      S.cur.winner = l; S.cur.flipped = true;
+      S.history[S.history.length-1].winner = l;
+      if(isT()) flipAdv(l);
+      txt += l==="you" ? "Vinci lo stallo: la scena passa a te." : `${NM('ai')} vince lo stallo: la scena passa a lui.`;
+    } else txt += w==="you" ? "Lo stallo va a te: la scena resta tua." : `Lo stallo va a ${NM('ai')}: la scena resta sua.`;
+    txt += " Le carte rivelate tornano in mano.";
+    S.events.push(txt);
+    S.pending.shift();
+  }
+  UI.picked = [];
+  if(isT()) autoPending();
+}
+function afterReveal(){
+  if(S.phase===1){
+    if(S.P.you.hand.length){ S.step = "discard"; UI.sel = null; return; }
+    if(S.P.ai.hand.length){ const his = aiDiscard(); S.P.ai.hand = S.P.ai.hand.filter(x=>x!==his); S.P.you.rif.push(his); }
+  }
+  drawUp("you"); drawUp("ai"); nextScene();
+}
+function doDiscard(){
+  const mine = UI.sel;
+  S.P.you.hand = S.P.you.hand.filter(x=>x!==mine); S.P.ai.rif.push(mine);
+  let his = null;
+  if(S.P.ai.hand.length){ his = aiDiscard(); S.P.ai.hand = S.P.ai.hand.filter(x=>x!==his); S.P.you.rif.push(his); }
+  S.lastDiscard = {you:mine, ai:his};
+  drawUp("you"); drawUp("ai");
+  nextScene();
+}
+function nextScene(){
+  S.opener = other(S.opener);
+  if(S.scene<S.nS){ S.scene++; startScene(); return; }
+  if(S.phase===1){ S.step = "interlude"; return; }
+  finish();
+}
+function startRiprese(){
+  for(const k of ["you","ai"]){ S.out.push(...S.P[k].agenda); S.P[k].agenda = shuffle(S.P[k].rif); S.P[k].rif = []; drawUp(k); }
+  if(S.script){ S.P.you.agenda = [...TUT.rip.you]; S.P.ai.agenda = [...TUT.rip.ai]; }
+  S.phase = 2; S.scene = 1; S.used = []; startScene();
+}
+function finish(){
+  const a = score("you"), b = score("ai");
+  if(a!==b){ S.result = {res: a>b?1:-1, a, b}; recordResult(S.result.res); S.step = "end"; }
+  else if(isT() && tTotal("you")!==tTotal("ai")){ const ta=tTotal("you"), tb=tTotal("ai"); S.result = {res: ta>tb?1:-1, a, b, tot:[ta,tb]}; recordResult(S.result.res); S.step = "end"; }
+  else if(!S.P.you.hand.length || !S.P.ai.hand.length){
+    const qa = S.P.you.hand.length ? Math.max(...S.P.you.hand.map(i=>C(i).quota)) : 0, qb = S.P.ai.hand.length ? Math.max(...S.P.ai.hand.map(i=>C(i).quota)) : 0;
+    S.result = {res: qa>qb?1:qa<qb?-1:0, a, b}; recordResult(S.result.res); S.step = "end";
+  }
+  else { S.step = "final"; UI.sel = null; }
+}
+function finalStallo(){
+  const mine = UI.sel, his = aiHighQuota(S.P.ai.hand);
+  const qa=C(mine).quota, qb=C(his).quota;
+  const res = qa>qb ? 1 : qa<qb ? -1 : 0;
+  S.result = {res, a:score("you"), b:score("ai"), stallo:{mine,his}};
+  recordResult(res); S.step = "end";
+}
+
+/* ---------------- rendering ---------------- */
+function cardHTML(id, o={}){
+  const c = C(id), a = peak(id);
+  const rows = c.stats.map((n,j)=>{
+    const tc = j===a, hi = o.hi===j;
+    return `<div class="st${tc?" tc":""}${hi?" hi":""}"><span class="lb">${V[j]}${tc?CIAK:""}</span><span class="bar"><i style="width:${Math.round(n/55*100)}%"></i></span><span class="vl">${n}</span></div>`;
+  }).join("");
+  const chips = (PW(id)?`<span class="vale">Vale 2</span>`:"") + `<span class="quota">Quota <b>${c.quota}</b></span>`;
+  const pw = PW(id) ? `<div class="power"><b>Se perde · ${esc(PW(id))}</b><span>${esc(powerShort(PW(id)))}</span></div>` : "";
+  const cls = ["card", c.deck, o.size||"md", o.sel?"sel":"", o.state||""].join(" ");
+  const tag = o.click ? `button type="button" data-act="${o.click}" data-id="${id}" aria-pressed="${o.sel?"true":"false"}" aria-label="${esc(c.name)}"${o.dis?" disabled":""}` : "div";
+  const end = o.click ? "button" : "div";
+  return `<${tag} class="${cls}"><div class="clap" aria-hidden="true"></div>
+  <div class="art"><img src="img/${c.slug}.jpg" alt="${esc(c.name)}"><div class="cchips">${chips}</div>${pw}</div>
+  <div class="cbody"><div class="cname">${esc(c.name)}</div><div class="stats">${rows}</div>
+  <div class="film"><span>${esc(c.film)}</span><span class="yr">${c.year}</span></div></div>
+  ${o.stamp?`<div class="stamp">${o.stamp}</div>`:""}${S && S.poison && S.poison.includes(id) && o.size==="sm" ? `<div class="stamp">−2</div>`:""}</${end}>`;
+}
+function backHTML(color, size="md"){
+  return `<div class="back ${color}" style="--cw:${size==="lg"?"clamp(150px,40vw,230px)":size==="sm"?"130px":"clamp(168px,30vw,210px)"}" aria-label="Carta coperta"><div class="bt">Kill<br>Quentin</div><div class="bs">Mazzo ${COLOR_NAME[color]}</div></div>`;
+}
+
+function render(){
+  const app = document.getElementById("app");
+  if(VIEW==="home") app.innerHTML = homeHTML();
+  else if(VIEW==="rules") app.innerHTML = rulesHTML();
+  else if(VIEW==="stats") app.innerHTML = statsHTML();
+  else app.innerHTML = gameHTML();
+  if(UI.sheet) app.insertAdjacentHTML("beforeend", sheetHTML());
+  if(VIEW==="game" && S && S.showTrivia) app.insertAdjacentHTML("beforeend", triviaHTML());
+  if(VIEW==="game" && S && S.step==="end" && S.result && !S.script && !S.cineDone) showCine();
+}
+function showCine(){
+  S.cineDone = true;
+  const r = S.result, t = r.res>0 ? "Hai vinto" : r.res<0 ? "Hai perso" : "Pareggio";
+  const el = document.createElement("div");
+  el.className = "cine " + (r.res>0 ? "win" : r.res<0 ? "lose" : "draw");
+  el.setAttribute("role","status");
+  el.innerHTML = `<div class="cine-in"><div class="cine-bar"></div><div class="cine-t">${t}</div><div class="cine-s">Kill Quentin</div><div class="cine-bar"></div></div>`;
+  const close = () => { el.remove(); };
+  el.addEventListener("click", close); el.addEventListener("animationend", e => { if(e.target===el) close(); });
+  setTimeout(close, 5000);
+  document.body.appendChild(el);
+}
+
+function summaryLine(){
+  const t = totalRow(), n = t.w+t.l+t.d;
+  return n ? `${n} ${n===1?"partita":"partite"} · ${t.w} ${t.w===1?"vittoria":"vittorie"}` : "Ancora nessuna partita";
+}
+function homeHTML(){
+  const seg = (k,vals) => vals.map(([v,l,cls])=>`<button type="button" class="${cls||""}" data-act="opt" data-k="${k}" data-v="${v}" aria-pressed="${OPTS[k]===v}">${l}</button>`).join("");
+  const faces = ["mr-blonde","hans-landa","mia-wallace","jules-winnfield","beatrix-kiddo","django","o-ren-ishii","calvin-candie","bill","jackie-brown","aldo-raine","marquis-warren"];
+  return `<section class="home">
+    <div class="poster" role="img" aria-label="Locandina di Kill Quentin">
+      <p class="pre">Ispirato ai film di Quentin Tarantino</p>
+      <p class="tagline">Due bande. Trentaquattro facce.<br>Un solo vincitore.</p>
+      <h1 class="ptitle">Kill<br>Quentin</h1>
+      <p class="psub">Il gioco di carte</p>
+      <div class="faces">${faces.map(f=>`<img src="img/${f}.jpg" alt="">`).join("")}</div>
+      <p class="billing">con <b>Mr. Blonde</b> · <b>Hans Landa</b> · <b>Mia Wallace</b> · <b>Jules Winnfield</b> · <b>Bill</b> · <b>O-Ren Ishii</b> · <b>Django</b> · <b>Calvin Candie</b> · <b>Jackie Brown</b> · <b>Aldo Raine</b> · <b>Marquis Warren</b> e con <b>Nice Guy Eddie</b> nel ruolo di Nice Guy Eddie</p>
+      <p class="soon">Prossimamente sul tuo tavolo</p>
+      <div class="rating"><span>V.M. 14</span><span>Due giocatori · 20 minuti</span></div>
+    </div>
+    <div class="setup">
+      <h3>Modalità</h3>
+      <div class="seg">${seg("mode",[["tracciati","Tracciati"],["classica","Classica"]])}</div>
+      <p class="note" style="margin:0">${OPTS.mode==="classica" ? "Variante semplice: vince chi fa più prese." : "La versione principale: ogni presa avanza su un tracciato, una voce è esclusa a caso."}</p>
+      <h3>Giocatori</h3>
+      <label for="inp-name">Il tuo nome</label>
+      <input id="inp-name" type="text" maxlength="18" list="nm-list" value="${esc(OPTS.name||"")}" autocomplete="off">
+      <div class="chips2">${SUGG.map((n,i)=>`<button type="button" class="chip" data-act="setname" data-v="${i}">${esc(n)}</button>`).join("")}<button type="button" class="chip" data-act="rollname">🎲 Sorteggia</button></div>
+      <label for="inp-cname">Avversario</label>
+      <input id="inp-cname" type="text" maxlength="18" list="nm-list" placeholder="Sorteggiato a ogni partita" value="${esc(OPTS.cname||"")}" autocomplete="off">
+      <datalist id="nm-list">${NAMES.map(n=>`<option value="${esc(n)}">`).join("")}</datalist>
+      <h3>Il tuo mazzo</h3>
+      <div class="seg">${seg("color",[["R","Rosso","r"],["G","Giallo","g"],["X","A caso"]])}</div>
+      <h3>Avversario</h3>
+      <div class="seg">${seg("diff",[["normale","Normale"],["difficile","Difficile"]])}</div>
+    </div>
+    <div class="menu">
+      ${S && S.step!=="end" ? `<button class="btn" data-act="resume">Riprendi la partita</button>` : ""}
+      <button class="btn ${S && S.step!=="end" ? "ghost":""}" data-act="new">Nuova partita</button>
+      <button class="btn ghost" data-act="tutorial">Tutorial · Tracciati</button>
+      ${OPTS.mode==="classica" ? `<button class="btn ghost" data-act="guided">Partita guidata · Classica</button>` : ""}
+      <button class="btn ghost" data-act="go" data-v="rules">Regole</button>
+      <button class="btn ghost" data-act="go" data-v="stats">Le tue partite</button>
+      <p class="hint">${summaryLine()}</p>
+    </div>
+    <p class="legal">Kill Quentin è un gioco di carte amatoriale, ideato per divertimento e senza scopo di lucro. Non è affiliato né approvato dagli autori, dagli studi o dai titolari dei film citati. Personaggi, titoli e immagini appartengono ai rispettivi proprietari.</p>
+  </section>`;
+}
+
+function rulesHTML(){
+  const pw = (T, more) => `<div class="powers">
+      <div><b>Fuori sequenza · Vincent Vega</b>${T["Fuori sequenza"]}</div>
+      <div><b>Resa dei conti · Beatrix Kiddo</b>${T["Resa dei conti"]}</div>
+      <div><b>Sono uno sbirro · Mr. Orange</b>${T["Sono uno sbirro"]}</div>
+      <div><b>Stallo alla messicana · Nice Guy Eddie</b>Ognuno sceglie una carta dalla mano: se la tua Quota è più alta, la scena passa a te. Poi le carte tornano in mano.</div>${more ? `
+      <div><b>Riscrivere la storia · Shosanna Dreyfus e Rick Dalton</b>${T["Riscrivere la storia"]}</div>
+      <div><b>Catene spezzate · Django</b>${T["Catene spezzate"]}</div>
+      <div><b>Risolvo problemi · Winston Wolf</b>${T["Risolvo problemi"]}</div>` : ""}
+    </div>`;
+  return `<section class="page">
+    <button class="btn ghost small" data-act="go" data-v="home" style="align-self:flex-start">← Indietro</button>
+    <h1 class="title">Regole</h1>
+    <p class="just">Due produttori, due bande. Ognuno ha il suo mazzo di 17 personaggi, rosso o giallo. Ogni carta ha cinque voci (Violenza, Sangue freddo, Dialogo, Stile, Vendetta), una Quota e il film da cui viene. La voce più alta è segnata dal ciak. Le carte potere hanno una fascia scura con un potere che scatta quando perdono la scena: 4 nella versione Classica, 7 nei Tracciati.</p>
+    <h2>Preparazione</h2>
+    <p class="just">Il tuo mazzo coperto è la tua agenda. Peschi 3 carte. Chi apre la prima scena è estratto a sorte, poi si alterna.</p>
+    <h2>Una scena</h2>
+    <ol>
+      <li>Chi apre gioca una carta coperta e annuncia una voce.</li>
+      <li><b>Niente typecasting:</b> non si può annunciare la voce col ciak della propria carta.</li>
+      <li>L'altro risponde con una carta e si rivelano insieme.</li>
+      <li>Vince il valore più alto nella voce annunciata. A parità decide la Quota; se è pari anche quella, vince chi risponde (nei Tracciati vince chi apre).</li>
+    </ol>
+    <h2>Provini e riprese</h2>
+    <p class="just"><b>Provini, 7 scene:</b> dopo ogni scena ognuno scarta una carta dalla mano, scoperta, nella pila dei Rifiutati dell'avversario, poi pesca fino a tornare a 3. Le carte rimaste nell'agenda alla fine dei provini escono dal gioco.</p>
+    <p class="just"><b>Riprese, 7 scene:</b> i Rifiutati che hai ricevuto, cioè gli scarti dell'avversario, diventano la tua nuova agenda. Tieni le 3 carte che hai in mano. Niente più scarti: dopo ogni scena peschi fino a 3.</p>
+
+    <h2>Tracciati · la versione principale</h2>
+    <ol>
+      <li>A inizio partita si esclude a caso una voce: non si può annunciare e non ha un tracciato.</li>
+      <li>Ognuno ha un tracciato per ciascuna delle altre 4 voci. Chi vince una scena avanza di 1 sul tracciato della voce annunciata, di 2 se nella scena c'era una carta potere.</li>
+      <li>Alla fine contano <b>tutti i tuoi tracciati tranne il più alto</b>. In più c'è un <b>bonus</b>: 1 punto se hai almeno 1 passo su ogni tracciato, 2 punti se ne hai almeno 2 su ognuno, e così via. Chi ha più punti vince.</li>
+      <li>A parità vince chi ha più passi in totale; se sono pari anche quelli, stallo alla messicana: ognuno sceglie una carta dalla mano e vince la Quota più alta.</li>
+      <li><b>Ruolo cucito addosso:</b> nelle riprese, una volta a partita, chi apre può annunciare la voce col ciak della propria carta. Se vince, l'avversario può scambiare una carta della sua mano con una dei suoi scarti (la sua agenda). Se perde, l'avversario avanza nella voce e anche di un passo su un tracciato a sua scelta.</li>
+      <li>A parità totale, cioè stesso valore e stessa Quota, vince chi ha aperto.</li>
+    </ol>
+    <h2>Carte potere · Tracciati</h2>
+    <p class="just">Le carte con la fascia scura e la scritta "Vale 2" sono carte potere. Il potere scatta quando la carta <b>perde</b> la scena, e non dipende da chi l'ha giocata. Se nella scena c'è una carta potere, chi vince avanza di 2 passi invece di 1. Sono 7: leggi il potere in fondo alla foto della carta, qui c'è il testo completo.</p>
+    ${pw(POWER_TXT_T, true)}
+
+    <h2>Classica · la variante semplice</h2>
+    <ol>
+      <li>Si gioca con tutte e 5 le voci, ma ogni voce si chiama una volta per giro: finché non sono uscite tutte e 5 non si ripete. Il giro riparte da capo all'inizio delle riprese.</li>
+      <li>Se chi apre non può giocare, perché le voci libere sono tutte la voce col ciak delle sue carte, regala all'avversario una carta a sua scelta.</li>
+      <li>Chi vince una scena tiene le due carte. Alla fine vince chi ha più carte; le carte potere valgono 2. A parità, stallo alla messicana.</li>
+    </ol>
+    <h2>Carte potere · Classica</h2>
+    <p class="just">Anche qui le carte con "Vale 2" hanno un potere che scatta quando perdono la scena. Sono 4, e ognuna vale 2 carte nel conteggio finale.</p>
+    ${pw(POWER_TXT)}
+  </section>`;
+}
+
+function statsHTML(){
+  migrate(STATS);
+  const t = totalRow(), n = t.w+t.l+t.d;
+  const tr = (lab,r,cls="") => `<tr class="${cls}"><td>${lab}</td><td>${r.w}</td><td>${r.l}</td><td>${r.d}</td><td>${r.w+r.l+r.d}</td></tr>`;
+  const head = `<thead><tr><th></th><th>Vinte</th><th>Perse</th><th>Pari</th><th>Totale</th></tr></thead>`;
+  const code = encodeCode();
+  return `<section class="page">
+    <button class="btn ghost small" data-act="go" data-v="home" style="align-self:flex-start">← Indietro</button>
+    <h1 class="title">Le tue partite</h1>
+    ${n ? `
+    <div class="tblwrap"><table class="st">${head}<tbody>${tr("Mazzo rosso",STATS.col.R)}${tr("Mazzo giallo",STATS.col.G)}${tr("Totale",t,"tot")}</tbody></table></div>
+    <div class="tblwrap"><table class="st">${head}<tbody>${tr("Normale",STATS.lvl.normale)}${tr("Difficile",STATS.lvl.difficile)}</tbody></table></div>
+    <div class="tblwrap"><table class="st">${head}<tbody>${tr("Tracciati",STATS.mode.tracciati)}${tr("Classica",STATS.mode.classica)}</tbody></table></div>
+    ` : `<p class="muted">Le tue statistiche compariranno qui dopo la prima partita contro il computer.</p>`}
+    ${UI.confirmReset ? `<div class="confirm"><p>Azzerare tutte le statistiche? Non si può annullare, a meno che tu non abbia un codice di salvataggio.</p><div class="row"><button class="btn small" data-act="reset-yes">Sì, azzera</button><button class="btn ghost small" data-act="reset-no">Annulla</button></div></div>`
+      : (n ? `<button class="btn ghost small" data-act="reset" style="align-self:flex-start">Azzera statistiche</button>` : "")}
+    <h2>Salva i tuoi progressi</h2>
+    <p class="just"><b>Perché te lo chiediamo.</b> Le statistiche restano solo in questo browser: se cambi telefono o browser, o cancelli i dati di navigazione, ripartono da zero. Con il codice di salvataggio le ritrovi in un attimo, ovunque.</p>
+    <p class="just"><b>Tienilo da parte:</b> nelle prossime versioni il codice potrà sbloccare ricompense speciali, e chi ha registrato più partite partirà avvantaggiato.</p>
+    <label for="code-out" class="note">Il tuo codice</label>
+    <textarea id="code-out" class="codebox" readonly>${code}</textarea>
+    <div class="row">
+      <button class="btn small" data-act="copy">Copia codice</button>
+      ${navigator.share ? `<button class="btn ghost small" data-act="share">Condividi…</button>` : ""}
+      <a class="btn ghost small" style="text-decoration:none;display:inline-flex;align-items:center" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent("Kill Quentin, il mio codice di salvataggio: "+code)}">Invia su WhatsApp</a>
+    </div>
+    <p class="note" id="copy-msg">${UI.msg==="copied"?'<span class="ok">Codice copiato. Ora incollalo dove vuoi conservarlo.</span>':UI.msg==="nocopy"?'<span class="err">Copia non disponibile qui: il codice è selezionato, copialo a mano.</span>':""}</p>
+    <p class="note just">Consiglio: salvalo su Google Keep, in una nota del telefono o mandalo a te stesso, così non lo perdi. Il codice cambia ogni volta che giochi: aggiornalo ogni tanto.</p>
+    <h2>Hai già un codice?</h2>
+    <label for="code-in" class="note">Caricandolo, le statistiche di questo dispositivo vengono sostituite da quelle del codice.</label>
+    <textarea id="code-in" class="codebox" placeholder="Incolla qui il codice che inizia con KQN1-"></textarea>
+    <button class="btn small" data-act="load" style="align-self:flex-start">Carica codice</button>
+    <p class="note">${UI.msg==="loaded"?'<span class="ok">Fatto: statistiche e opzioni ripristinate.</span>':UI.msg==="bad"?'<span class="err">Codice non valido: controlla di averlo copiato per intero, a partire da KQN1-.</span>':""}</p>
+  </section>`;
+}
+
+function topbarHTML(){
+  const ph = S.phase===1 ? "Provini" : "Riprese";
+  return `<div class="topbar">
+    <button class="btn ghost small" data-act="go" data-v="home">Menu</button>
+    <div class="phase">${ph} · scena <span>${Math.min(S.scene,S.nS)}</span> di ${S.nS}${isT()?` · esclusa <span>${V[S.ex]}</span>`:""}</div>
+    <div class="score"><span>${NM("you")} <b>${score("you")}</b></span><span>${NM("ai")} <b>${score("ai")}</b></span></div>
+  </div>`;
+}
+function sideHTML(k){
+  const p = S.P[k], col = k==="you" ? S.color : S.aiColor;
+  const label = NM(k);
+  const rifLab = S.phase===1 ? `Rifiutati per ${k==="you"?"te":"lui"}` : "";
+  return `<div class="side">
+    <div class="side-head">
+      <span class="who"><span class="dot ${col}"></span>${label} · mazzo ${COLOR_NAME[col]}</span>
+      <div class="chips">
+        <span class="chip">Agenda <b>${p.agenda.length}</b></span>
+        <button class="chip" data-act="sheet" data-v="won-${k}">Carte vinte <b>${p.won.length}</b>${isT()?"":` · punti <b>${score(k)}</b>`}</button>
+        ${S.phase===1 ? `<button class="chip" data-act="sheet" data-v="rif-${k}">${rifLab} <b>${p.rif.length}</b></button>` : ""}
+      </div>
+    </div>
+    ${k==="ai" ? `<div class="backs">${p.hand.map(()=>`<span class="mini-back" style="--c:var(--${col==="R"?"red":"gold"})"></span>`).join("")}<span class="muted" style="font-size:14px;align-self:center">${p.hand.length} in mano</span></div>` : ""}
+  </div>`;
+}
+function boardHTML(){
+  const live = [0,1,2,3,4].filter(j=>j!==S.ex);
+  const top = k => live.reduce((a,b)=> S.T[k][b]>S.T[k][a]?b:a);
+  const tops = {you:top("you"), ai:top("ai")}, adv = S.cur && S.cur.adv && S.step==="reveal" ? S.cur.adv : null;
+  const col = {you:S.color, ai:S.aiColor};
+  const cell = (k,j) => { const n = S.T[k][j], off = j===tops[k] && n>0, hot = adv && adv.k===k && adv.v===j;
+    return `<div class="bc ${k} ${off?"off":""} ${hot?"hot":""}" style="--pc:var(--${col[k]==="R"?"red":"gold"})" title="${V[j]}: ${n}${off?" (non conta)":""}"><span class="pips">${Array.from({length:Math.max(n,0)},()=>"<i></i>").join("")}</span><span class="bv">${n}</span></div>`; };
+  const rows = [0,1,2,3,4].map(j => j===S.ex ? `<div class="brow x"><span class="bn">${V[j]} · esclusa</span></div>` : `<div class="brow">${cell("you",j)}<span class="bn">${V[j]}</span>${cell("ai",j)}</div>`).join("");
+  return `<div class="board" aria-label="Tracciati"><div class="bhead"><span>${NM("you")}</span><span>Tracciati</span><span>${NM("ai")}</span></div>${rows}<div class="brow bonus"><span class="bc you"><span class="bv">+${tBonus(S.T.you,S.ex)}</span></span><span class="bn">Bonus</span><span class="bc ai"><span class="bv">+${tBonus(S.T.ai,S.ex)}</span></span></div><div class="bfoot"><span>Punti <b>${score("you")}</b></span><span class="bt">tutti i tracciati tranne il più alto, più il bonus</span><span>Punti <b>${score("ai")}</b></span></div></div>`;
+}
+function tracksHTML(k){
+  const t = S.T[k], live = [0,1,2,3,4].filter(j=>j!==S.ex);
+  const top = live.reduce((a,b)=> t[b]>t[a]?b:a);
+  const VS = ["Violenza","S. freddo","Dialogo","Stile","Vendetta"];
+  return `<div class="tracks" aria-label="Tracciati">${VS.map((n,j)=>{
+    const ex = j===S.ex, off = !ex && j===top && t[j]>0;
+    return `<div class="trk ${ex?"x":""} ${off?"off":""}"><span class="tn">${n}</span><span class="tv">${ex?"—":t[j]}</span><span class="pips">${ex?"esclusa":Array.from({length:Math.max(t[j],0)},()=>"<i></i>").join("")}</span>${off?`<span class="tag">non conta</span>`:""}</div>`;
+  }).join("")}<div class="tsum">Punti <b>${score(k)}</b><span>tutti i tracciati tranne il più alto</span></div></div>`;
+}
+function handHTML(act, hi){
+  return `<div class="hand">${S.P.you.hand.map(id=>cardHTML(id,{click:act, sel:UI.sel===id, hi, dis:blocked(id)})).join("")}</div>`;
+}
+
+function gameHTML(){
+  let stage = "", hand = "", act = "";
+  const st = S.step;
+  if(st==="open"){
+    const can = UI.sel!=null && UI.voce!=null;
+    const pk = UI.sel!=null ? peak(UI.sel) : -1;
+    const al = allowed(), ck = ciakOK("you"), e0 = sEntry(), mv = e0 && e0.must && e0.must.voce!=null ? e0.must.voce : null;
+    stage = `<p class="prompt">${isT() ? "Apri tu la scena. Scegli una carta e la voce: chi vince avanza su quel tracciato." : "Apri tu la scena. Scegli una carta, poi annuncia una delle voci ancora libere in questo giro."}</p>
+      <div class="voci" role="group" aria-label="Voce da annunciare">${V.map((n,j)=>`<button type="button" class="${!al.includes(j)?"u":""}" data-act="voce" data-v="${j}" aria-pressed="${UI.voce===j}" ${UI.sel==null||(j===pk&&!ck)||!al.includes(j)||(mv!=null&&j!==mv)?"disabled":""} title="${!al.includes(j)?(isT()?"Voce esclusa in questa partita":"Già chiamata in questo giro"):j===pk?(ck?"Ruolo cucito addosso: la voce col ciak di questa carta":"Niente typecasting: è la voce col ciak di questa carta"):""}">${n}${j===pk&&ck&&UI.sel!=null?" ★":""}</button>`).join("")}</div>
+      ${ck ? `<p class="prompt" style="font-size:15px"><b>Ruolo cucito addosso</b> (una volta a partita, nelle riprese): puoi aprire con la voce col ciak della carta, segnata ★. Se vinci, ${NM('ai')} può scambiare una carta della sua mano con una dei suoi scarti. Se perdi, ${NM('ai')} avanza nella voce e anche di un passo su un tracciato a sua scelta.</p>` : ""}
+      ${UI.sel!=null && !al.some(v=>v!==pk) ? `<p class="prompt" style="font-size:16px"><em>${esc(C(UI.sel).name)}</em> ha il ciak sull'unica voce libera: scegli un'altra carta.</p>` : ""}
+      ${voiceTrack()}`;
+    act = `<button class="btn" data-act="play-open" ${can?"":"disabled"}>Gira la scena</button>`;
+    hand = handHTML("pick", UI.voce);
+  } else if(st==="respond"){
+    stage = `<p class="prompt">${NM('ai')} apre la scena e annuncia:</p>
+      <span class="ann">${V[S.cur.voce]}</span>
+      ${backHTML(S.aiColor,"sm")}
+      <p class="prompt">Scegli la carta con cui rispondere: la riga ${V[S.cur.voce]} è evidenziata.</p>${voiceTrack()}`;
+    act = `<button class="btn" data-act="play-respond" ${UI.sel!=null?"":"disabled"}>Rispondi</button>`;
+    hand = handHTML("pick", S.cur.voce);
+  } else if(st==="gift"){
+    const al = allowed();
+    stage = `<p class="eyebrow">Typecasting</p><p class="prompt">Non puoi aprire: le voci ancora libere in questo giro (<em>${al.map(v=>V[v]).join(", ")}</em>) sono la voce col ciak di tutte le tue carte. Regala una carta a tua scelta a ${NM('ai')}.</p>${voiceTrack()}`;
+    act = `<button class="btn" data-act="gift" ${UI.sel!=null?"":"disabled"}>Regala</button>`;
+    hand = handHTML("pick");
+  } else if(st==="giftinfo"){
+    stage = `<p class="eyebrow">Typecasting</p><p class="prompt">${NM('ai')} non può aprire con nessuna voce libera e ti regala una carta:</p>
+      ${cardHTML(S.lastGift.id,{size:"md"})}
+      <button class="btn" data-act="continue">Continua</button>`;
+  } else if(st==="reveal"){
+    stage = revealHTML();
+
+  } else if(st==="discard"){
+    stage = `<p class="prompt">Scegli una carta da scartare. Finirà scoperta tra i <em>Rifiutati</em> di ${NM('ai')}, che la userà nelle riprese.</p>`;
+    act = `<button class="btn" data-act="discard" ${UI.sel!=null?"":"disabled"}>Scarta</button>`;
+    hand = handHTML("pick");
+  } else if(st==="interlude"){
+    stage = `<p class="eyebrow">Fine dei provini</p><h2 class="title" style="font-size:clamp(36px,8vw,64px)">Si gira</h2>
+      <p class="prompt">Ora le riprese: giochi con i ${S.P.you.rif.length} attori scartati da ${NM('ai')} più le ${S.P.you.hand.length} carte che hai in mano. Lui farà lo stesso con i tuoi scarti.</p>
+      <div class="grid">${S.P.you.rif.map(id=>cardHTML(id,{size:"sm"})).join("")}</div>
+      <button class="btn" data-act="riprese">Inizia le riprese</button>`;
+  } else if(st==="final"){
+    stage = `<p class="eyebrow">Parità: ${score("you")} a ${score("ai")}</p><h2 class="title" style="font-size:clamp(32px,7vw,56px)">Stallo alla messicana</h2>
+      <p class="prompt">Scegli una carta dalla mano. Vince la Quota più alta.</p>`;
+    act = `<button class="btn" data-act="final" ${UI.sel!=null?"":"disabled"}>Spara</button>`;
+    hand = handHTML("pick");
+  } else if(st==="end"){
+    return endHTML();
+  }
+  return `${topbarHTML()}<div class="gamegrid">${isT()?`<aside class="gside">${boardHTML()}</aside>`:""}<div class="gmain">${coachHTML()}${sideHTML("ai")}<div class="stage">${stage}</div>${hand}${act?`<div class="actbar">${act}</div>`:""}${sideHTML("you")}${historyHTML()}</div></div>${isT()?`<button class="fab" data-act="sheet" data-v="board">Tracciati · ${score("you")} a ${score("ai")}</button>`:""}`;
+}
+
+function revealHTML(){
+  const c = S.cur, w = c.winner;
+  const youStamp = w==="you" ? "Vince" : "", aiStamp = w==="ai" ? "Vince" : "";
+  let out = `<p class="verdict ${w==="you"?"":"lost"}">${w==="you" ? "Scena tua" : `Scena di ${NM('ai')}`}</p>
+    <p class="explain">${esc(c.why)} ${c.opener==="you"?"Hai aperto tu.":`Ha aperto ${NM('ai')}.`}${c.flipped?" La scena è stata ribaltata.":""}${isT() && c.adv ? ` <b style="color:var(--yellow)">${c.adv.k==="you"?"Avanzi":`${NM('ai')} avanza`} di ${c.adv.n} in ${V[c.adv.v]}.</b>` : ""}</p>
+    <div class="reveal">
+      <div class="slot"><span class="lab">${NM("you")}</span>${cardHTML(c.you,{size:"lg", hi:c.voce, state: w==="you"?"win":"lose", stamp:youStamp})}</div>
+      <div class="slot"><span class="lab">${NM("ai")}</span>${cardHTML(c.ai,{size:"lg", hi:c.voce, state: w==="ai"?"win":"lose", stamp:aiStamp})}</div>
+    </div>`;
+  if(S.events.length) out += `<div class="events">${S.events.map(e=>`<div class="event">${e}</div>`).join("")}</div>`;
+  if(S.pending.length){
+    const p = S.pending[0];
+    const trkBtns = (k, act) => `<div class="voci">${[0,1,2,3,4].filter(j=>j!==S.ex && S.T[k][j]>0).map(j=>`<button type="button" data-act="${act}" data-v="${j}">${V[j]} · ${S.T[k][j]}</button>`).join("")}</div>`;
+    if(p.type==="fuori-t"){
+      out += `<div class="events"><div class="event"><b>Fuori sequenza</b> Scegli il tracciato di ${NM('ai')} da cui prendere un passo: lo aggiungi al tuo, nella stessa voce.</div></div>${trkBtns("ai","trk-steal")}`;
+    } else if(p.type==="sbirro"){
+      out += `<div class="events"><div class="event"><b>Sono uno sbirro</b> Hai vinto contro Mr. Orange, ma era uno sbirro: non avanzi e devi arretrare di un passo. Scegli il tracciato.</div></div>${trkBtns("you","trk-back")}`;
+    } else if(p.type==="riscrivi"){
+      const live = [0,1,2,3,4].filter(j=>j!==S.ex);
+      if(p.from===null) out += `<div class="events"><div class="event"><b>Riscrivere la storia</b> Hai perso con ${esc(C(S.cur.you).name)}: sposta un passo da un tuo tracciato a un altro. Prima scegli da dove togliere.</div></div>${trkBtns("you","trk-from")}`;
+      else out += `<div class="events"><div class="event"><b>Riscrivere la storia</b> Togli un passo da ${V[p.from]}. Ora scegli dove metterlo.</div></div><div class="voci">${live.filter(j=>j!==p.from).map(j=>`<button type="button" data-act="trk-to" data-v="${j}">${V[j]} · ${S.T.you[j]}</button>`).join("")}</div>`;
+    } else if(p.type==="ciak-bonus"){
+      out += `<div class="events"><div class="event"><b>Ruolo cucito addosso</b> ${NM('ai')} ha aperto con la voce col ciak e ha perso: avanzi di un passo su un tracciato a tua scelta.</div></div><div class="voci">${[0,1,2,3,4].filter(j=>j!==S.ex).map(j=>`<button type="button" data-act="trk-bonus" data-v="${j}">${V[j]} · ${S.T.you[j]}</button>`).join("")}</div>`;
+    } else if(p.type==="ciak-swap"){
+      out += `<div class="events"><div class="event"><b>Ruolo cucito addosso</b> ${NM('ai')} ha aperto con la voce col ciak e ha vinto: puoi scambiare una carta della tua mano con una dei tuoi scarti. Scegli prima quella da prendere, poi quella da dare, oppure rinuncia.</div></div>
+        <p class="note">Dai tuoi scarti (agenda)</p><div class="picker">${S.P.you.agenda.map(id=>cardHTML(id,{size:"sm", click:"inf-take", sel:UI.picked[0]===id})).join("")}</div>
+        <p class="note">Dalla tua mano</p><div class="picker">${S.P.you.hand.map(id=>cardHTML(id,{size:"sm", click:"inf-give", sel:UI.picked[1]===id})).join("")}</div>
+        <div class="row" style="justify-content:center"><button class="btn" data-act="inf-go" ${UI.picked[0]!=null&&UI.picked[1]!=null?"":"disabled"}>Scambia</button><button class="btn ghost" data-act="inf-skip">Non scambiare</button></div>`;
+    } else if(p.type==="fuori"){
+      out += `<div class="events"><div class="event"><b>Fuori sequenza</b> Scegli una carta tra quelle vinte da ${NM('ai')}.</div></div>
+        <div class="picker">${S.P.ai.won.map(id=>cardHTML(id,{size:"sm", click:"steal"})).join("")}</div>`;
+    } else if(p.type==="duello"){
+      out += `<div class="events"><div class="event"><b>Resa dei conti</b> ${p.loser==="you"?"Beatrix non si arrende.":`La Beatrix di ${NM('ai')} non si arrende.`} Duello in ${V[S.cur.voce]}: scegli una carta dalla tua mano. ${isT()?"Chi vince prende la scena e avanza di un passo in più.":"Chi vince prende tutte e 4 le carte."}</div></div>
+        <div class="picker">${S.P.you.hand.map(id=>cardHTML(id,{size:"sm", click:"pick", sel:UI.sel===id, hi:S.cur.voce})).join("")}</div>
+        <button class="btn" data-act="duel-go" ${UI.sel!=null?"":"disabled"}>Combatti</button>`;
+    } else if(p.type==="stallo"){
+      out += `<div class="events"><div class="event"><b>Stallo alla messicana</b> ${p.loser==="you"?"Nice Guy Eddie ha perso, ma tira fuori la pistola.":`Nice Guy Eddie di ${NM('ai')} ha perso, ma tira fuori la pistola.`} Scegli una carta dalla tua mano: vince la Quota più alta.</div></div>
+        <div class="picker">${S.P.you.hand.map(id=>cardHTML(id,{size:"sm", click:"pick", sel:UI.sel===id, dis:blocked(id)})).join("")}</div>
+        <button class="btn" data-act="stallo-go" ${UI.sel!=null?"":"disabled"}>Spara</button>`;
+    }
+  } else out += `<button class="btn" data-act="continue">Continua</button>`;
+  return out;
+}
+
+function bestOpen(){
+  const al = allowed(); let best = null;
+  for(const id of S.P.you.hand) for(const v of al){ if(v===peak(id)) continue; const n = C(id).stats[v]; if(!best || n>best[2]) best=[id,v,n]; }
+  return best;
+}
+function tutText(){
+  const e = sEntry(), idx = (S.phase-1)*S.nS + S.scene-1, st = S.step, p = S.pending[0], ai = NM("ai");
+  const n = id => `<b>${esc(C(id).name)}</b>`;
+  if(st==="end") return `Tutorial finito. Hai visto tutto: scene, ciak, tracciati, carte potere, stallo e ruolo cucito addosso. Nella partita vera le scene sono 7 + 7, tu scegli le carte e il computer non è così arrendevole. Questa partita non conta nelle statistiche: dal menu puoi iniziarne una vera.`;
+  if(st==="interlude") return `Fine dei provini. Ora le <b>riprese</b>: giochi con le 3 carte che hai in mano e con i Rifiutati, cioè le carte che ${ai} ha scartato (le vedi qui sotto). Lui userà i tuoi scarti.`;
+  if(!e) return null;
+  switch(idx){
+    case 0:
+      if(st==="open") return `<b>Benvenuto sul set.</b> Tu hai il mazzo rosso, ${ai} il giallo. Ogni scena: chi apre gioca una carta e annuncia una <b>voce</b>, l'altro risponde con una carta, vince il numero più alto in quella voce. Chi vince avanza di un passo sul <b>tracciato</b> di quella voce: sono qui sopra, tu a sinistra, ${ai} a destra, uno accanto all'altro. In questa partita <b>${V[S.ex]}</b> è esclusa. Alla fine contano tutti i tuoi tracciati tranne il più alto, più un <b>bonus</b>: un punto per ogni passo che hai su <i>tutti</i> i tracciati.<br><br>Ora tocca ${n(0)} e poi <b>Sangue freddo</b>. Il ciak sulla riga nera è la voce più alta della carta, Violenza: per regola chi apre non può annunciarla (niente typecasting). Qui giochiamo 3 provini e 3 riprese.`;
+      if(st==="reveal") return `${n(0)} ha 37 in Sangue freddo, ${n(20)} solo 7: vinci e avanzi di 1. ${ai} ha giocato una carta debole: sa di non poter vincere e tiene le buone per dopo. Premi Continua.`;
+      if(st==="discard") return `<b>Provini:</b> dopo ogni scena scarti una carta, scoperta. Finisce tra i Rifiutati di ${ai}, che la userà nelle riprese. Scarta ${n(11)}, che ti serve poco. Anche lui scarta una carta per te.`;
+      break;
+    case 1:
+      if(st==="respond") return `Ora apre ${ai}, con ${n(18)} in Sangue freddo (37). Nella tua mano nessuna carta lo batte: gioca la più debole, ${n(2)}, e tieni le buone per le prossime scene. Perdere una scena costa solo un passo.`;
+      if(st==="reveal") return `${ai} avanza di 1 in Sangue freddo: guarda i tracciati. Perdere con la carta più debole è spesso la mossa giusta.`;
+      if(st==="discard") return `Scarta ${n(8)}.`;
+      break;
+    case 2:
+      if(st==="open") return `<b>Carte potere:</b> hanno la fascia scura e "Vale 2". Se perdono la scena scatta il loro potere, ma ogni scena con una carta potere fa avanzare di <b>2</b> passi, a chi vince. ${n(15)} ha <b>Fuori sequenza</b>. Giocalo in <b>Violenza</b>: perderai, ma poi ruberai un passo.`;
+      if(st==="reveal" && p && p.type==="fuori-t") return `${n(22)} batte ${n(15)} (50 contro 21): ${ai} avanza di 2 in Violenza, perché c'era una carta potere. Ma Vega ha perso e il suo potere scatta: scegli <b>Violenza</b> e prendi un passo dal tracciato di ${ai} per aggiungerlo al tuo.`;
+      if(st==="reveal") return `Il passo è passato dal tracciato di ${ai} al tuo. Perdere con una carta potere non è un disastro.`;
+      if(st==="discard") return `Ultimo scarto dei provini: ${n(7)}.`;
+      break;
+    case 3:
+      if(st==="respond") return `Siamo nelle riprese. ${ai} apre con ${n(33)} in Sangue freddo, un misero 8. Battilo con ${n(12)} (26).`;
+      if(st==="reveal" && p && p.type==="stallo") return `Vinci tu, e avanzi di 2 perché c'è una carta potere. Ma ${n(33)} ha perso e scatta lo <b>Stallo alla messicana</b>: ognuno sceglie una carta dalla mano e se la Quota di chi ha perso è più alta, la scena passa a lui. La Quota è in alto a destra sulla foto. Gioca ${n(1)}, Quota 24.`;
+      if(st==="reveal") return `Quota 24 contro 22: la scena resta tua. Le carte rivelate tornano in mano.`;
+      break;
+    case 4:
+      if(st==="open") return `<b>Ruolo cucito addosso:</b> nelle riprese, una volta a partita, chi apre può annunciare la voce col ciak della propria carta. ${n(3)} ha 51 in Vendetta, la sua voce col ciak: tocca la carta e poi <b>Vendetta ★</b>. Se vinci, ${ai} potrà scambiare una carta della sua mano con una dei suoi scarti. Se perdi, avanza nella voce e anche su un altro tracciato. Usalo solo con una carta fortissima.`;
+      if(st==="reveal") return `Vinci in Vendetta. Ma il ruolo ha un prezzo: ${ai} ha potuto migliorare la sua mano scambiando una carta con uno scarto (lo leggi nel riquadro).`;
+      break;
+    case 5:
+      if(st==="respond") return `<b>Ultima scena.</b> Gioca come vuoi. Guarda i tracciati: contano tutti tranne il più alto di ciascuno, più il bonus se hai almeno un passo su ognuno (qui nessuno lo ha, perché in 6 scene restano dei tracciati a zero). A volte conviene non rispondere con la carta migliore.`;
+      if(st==="reveal") return `Il tutorial è finito: premi Continua per vedere il risultato.`;
+      break;
+  }
+  return null;
+}
+function coachTip(){
+  if(S.script){ const t = tutText(); return t ? ["tut", t] : null; }
+  if(!S.tutorial) return null;
+  const st = S.step, seen = k => S.tips[k];
+  if(st==="open" && !seen("open1")){
+    const b = bestOpen();
+    const tr = isT() ? ` Ogni presa vinta ti fa avanzare sul tracciato di quella voce. In questa partita <b>${V[S.ex]}</b> è esclusa: non si può chiamare e il suo tracciato non esiste. Alla fine contano tutti i tuoi tracciati tranne il più alto, più un bonus se avanzi su tutti: conviene avanzare su più voci, non su una sola.` : "";
+    return ["open1", `Benvenuto sul set. Tu hai il mazzo rosso, ${NM('ai')} il giallo. In ogni scena chi apre gioca una carta e annuncia una voce, l'altro risponde, e vince il valore più alto in quella voce.${tr} Tocca una carta della tua mano, poi una voce. La riga nera col ciak è la voce più alta della carta: chi apre non può annunciarla. ${b?`Un buon inizio: <b>${esc(C(b[0]).name)}</b> in <b>${V[b[1]]}</b> (${b[2]}).`:""}`];
+  }
+  if(st==="respond" && !seen("respond")) return ["respond", `Ora apre ${NM('ai')} e ha annunciato <b>${V[S.cur.voce]}</b>. Nelle tue carte quella riga è evidenziata in giallo: rispondi con il numero più alto. Se nessuna carta può vincere, gioca la più debole e tieni le buone per dopo. Chi risponde può usare anche la voce col ciak. Se i numeri sono identici, e anche la Quota, vince chi apre${""}.`];
+  if(isT() && st==="open" && S.phase===2 && ciakOK("you") && seen("open1") && !seen("ciak")) return ["ciak", `Siamo nelle riprese e hai il <b>ruolo cucito addosso</b>, una volta per partita: puoi aprire con la voce col ciak di una carta, segnata ★. È rischioso: se vinci, ${NM('ai')} può migliorare la sua mano scambiando una carta con i suoi scarti; se perdi, avanza nella voce e su un altro tracciato. Usalo solo con una carta davvero fortissima in quella voce.`];
+  if(isT() && st==="reveal" && S.pending.length && ["riscrivi","ciak-bonus","ciak-swap"].includes(S.pending[0].type) && !seen("power2")) return ["power2", S.pending[0].type==="riscrivi" ? `<b>Riscrivere la storia</b>: perdere con questa carta ti permette di spostare un passo da un tracciato a un altro. Conviene togliere dal tracciato più alto, che tanto non conta, e metterlo dove sei più indietro.` : S.pending[0].type==="ciak-bonus" ? `Chi apre con il ruolo cucito addosso e perde regala all'avversario un passo in più su un tracciato a sua scelta. Scegli dove sei più indietro.` : `Chi apre con il ruolo cucito addosso e vince fa un regalo all'avversario: puoi scambiare una carta della mano con una dei tuoi scarti. Prendi la più forte e dai la più debole.`];
+  if(isT() && st==="reveal" && S.events.some(e=>/Catene spezzate|Risolvo problemi/.test(e)) && !seen("power3")) return ["power3", `Un potere è scattato senza che tu debba scegliere: <b>Catene spezzate</b> dà un passo extra alla prossima scena vinta da chi l'ha perso, <b>Risolvo problemi</b> annulla l'avanzamento della scena. Lo leggi nella fascia scura della carta.`];
+  if(st==="reveal" && S.pending.length && !seen("power")) return ["power", isT() ? `Una carta potere ha perso, quindi scatta il suo potere: l'effetto è scritto nella fascia scura sulla foto. Ricorda anche che una presa con una carta potere fa avanzare di 2 invece che di 1.` : `Una carta potere ha perso, quindi scatta il suo potere. Le carte potere hanno la fascia scura sulla foto con l'effetto scritto, e chi le vince le conta come 2 punti.`];
+  if(st==="reveal" && !seen("reveal")) return ["reveal", isT() ? `Le carte si scoprono: quella illuminata ha vinto, e chi l'ha giocata avanza sul tracciato della voce annunciata. Guarda i tracciati: il più alto di ciascuno è barrato perché non conta. Quindi a volte vincere nella tua voce più forte non serve, e conviene aprire dove sei indietro.` : `Le carte si scoprono: quella illuminata ha vinto e chi l'ha giocata prende entrambe. In alto vedi i punti di tutti e due. In fondo alla pagina c'è lo storico di tutte le prese.`];
+  if(isT() && st==="respond" && seen("respond") && !seen("deny")) return ["deny", `Quando rispondi, guarda anche i tracciati di ${NM('ai')}: se la voce annunciata gli serve, vale la pena giocare una carta forte per non farlo avanzare. Se invece per lui è il tracciato più alto, puoi risparmiare le carte buone.`];
+  if(st==="discard" && !seen("discard")) return ["discard", `Siamo nei provini: dopo ogni scena si scarta una carta, scoperta. Il tuo scarto finisce a ${NM('ai')}, che lo userà contro di te nelle riprese. Scarta qualcosa che ti serve poco ma che non lo renda troppo forte. Poi si pesca fino a tornare a 3 carte.`];
+  if(!isT() && st==="open" && S.used.length && !seen("cycle")) return ["cycle", `Il giro delle voci: ogni voce si chiama una sola volta per giro. Quelle barrate sono già uscite. Quando scarti e quando scegli cosa giocare, pensa alle voci che restano.`];
+  if(st==="gift" && !seen("gift")) return ["gift", `Typecasting: le voci libere sono il ciak di tutte le tue carte, quindi non puoi aprire e devi regalare una carta a ${NM('ai')}. Succede di rado, ma conviene tenerne conto quando scarti.`];
+  if(st==="interlude" && !seen("interlude")) return ["interlude", `Fine dei provini. Adesso giochi con le carte che ${NM('ai')} ha scartato, più le 3 che hai in mano. Ecco perché contava cosa scartavi: lui ora ha i tuoi scarti.`];
+  if(st==="final" && !seen("final")) return ["final", isT() ? `Parità di punti e anche di passi totali: si decide con lo stallo alla messicana. Scegli la carta con la Quota più alta.` : `Parità di punti: si decide con lo stallo alla messicana. Scegli la carta con la Quota più alta.`];
+  if(st==="end" && !seen("end")) return ["end", `Partita guidata finita. Le partite guidate non contano nelle statistiche. Ora puoi giocarne una vera dal menu.`];
+  return null;
+}
+function coachHTML(){
+  const t = coachTip(); if(!t) return "";
+  if(t[0]==="tut") return `<div class="coach" role="note"><p class="eyebrow">Tutorial · scena ${S.step==="end"?"finale":(S.phase-1)*S.nS+S.scene} di ${S.nS*2}</p><p>${t[1]}</p></div>`;
+  return `<div class="coach" role="note"><p class="eyebrow">Partita guidata</p><p>${t[1]}</p><button class="btn small" data-act="tip" data-v="${t[0]}">Ho capito</button></div>`;
+}
+function triviaHTML(){
+  if(!S || !S.showTrivia || S.trivia==null) return "";
+  const t = TRIVIA[S.trivia];
+  return `<div class="sheet trivia-wrap"><div class="trivia" role="dialog" aria-label="Curiosità">
+    <p class="eyebrow">Lo sapevi?</p>
+    <p class="tfilm">${esc(t.f)} <span>${t.y}</span></p>
+    <p class="ttext">${esc(t.t)}</p>
+    <p class="tsrc">Fonte: ${t.s}</p>
+    <button class="btn" data-act="trivia-ok">${S.tutorial?"Inizia la partita guidata":"Si gira"}</button>
+  </div></div>`;
+}
+function voiceTrack(){
+  if(isT()) return "";
+  const used = S.used.length>=5 ? [] : S.used;
+  return `<div class="vtrack" aria-label="Voci chiamate in questo giro"><span>Giro delle voci</span>${V.map((n,j)=>`<i class="${used.includes(j)?"u":""}">${n}</i>`).join("")}</div>`;
+}
+function historyHTML(){
+  if(!S.history.length) return "";
+  const items = [...S.history].reverse().map(h=>{
+    const hc = (id,me) => `<div class="hcard ${h.winner===me?"w":""}"><img src="img/${C(id).slug}.jpg" alt=""><i>${C(id).stats[h.voce]}</i><span>${esc(C(id).name)}</span></div>`;
+    return `<div class="hitem"><span class="hv">${h.phase===1?"Provini":"Riprese"} ${h.scene} · ${V[h.voce]}</span>
+      <div class="hpair">${hc(h.you,"you")}${hc(h.ai,"ai")}</div>
+      <span class="res ${h.winner==="you"?"me":""}">${h.winner==="you"?"Presa tua":`Presa di ${NM('ai')}`}</span></div>`;
+  }).join("");
+  return `<div class="hist"><h3>Le prese · ${NM('you')} a sinistra, ${NM('ai')} a destra</h3><div class="htrack">${items}</div></div>`;
+}
+
+function endHTML(){
+  const r = S.result;
+  const head = r.res>0 ? "Hai vinto" : r.res<0 ? "Hai perso" : "Pareggio";
+  let st = "";
+  if(r.tot) st += `<p class="prompt">Parità di punti: decide il totale dei passi, ${r.tot[0]} contro ${r.tot[1]}.</p>`;
+  if(r.stallo) st += `<p class="prompt">Stallo finale: ${esc(C(r.stallo.mine).name)} (Quota ${C(r.stallo.mine).quota}) contro ${esc(C(r.stallo.his).name)} (Quota ${C(r.stallo.his).quota}).</p>`;
+  return `${topbarHTML()}${coachHTML()}<section class="final">
+    <p class="eyebrow">Fine delle riprese</p>
+    <h1 class="title">${head}</h1>
+    <p class="big">${NM("you")} ${r.a} · ${NM("ai")} ${r.b}</p>${st}
+    ${isT() ? boardHTML() : ""}
+    <div class="row" style="justify-content:center"><button class="btn" data-act="new">Nuova partita</button><button class="btn ghost" data-act="sheet" data-v="won-you">Le tue carte vinte</button><button class="btn ghost" data-act="go" data-v="stats">Le tue partite</button></div>
+  </section>${historyHTML()}`;
+}
+
+function sheetHTML(){
+  if(UI.sheet==="board") return `<div class="sheet" data-act="close-sheet"><div class="sheet-in" role="dialog" aria-label="Tracciati"><div class="sheet-head"><h3>Tracciati</h3><button class="btn ghost small" data-act="close-sheet">Chiudi</button></div>${boardHTML()}</div></div>`;
+  const [kind,k] = UI.sheet.split("-");
+  const p = S.P[k];
+  let title, list;
+  if(kind==="won"){ title = k==="you" ? "Le tue carte vinte" : `Carte vinte da ${NM('ai')}`; list = p.won; }
+  else { title = k==="you" ? `Rifiutati per te (scartati da ${NM('ai')})` : `Rifiutati per ${NM('ai')} (scartati da te)`; list = p.rif; }
+  return `<div class="sheet" data-act="close-sheet"><div class="sheet-in" role="dialog" aria-label="${title}">
+    <div class="sheet-head"><h3>${title}</h3><button class="btn ghost small" data-act="close-sheet">Chiudi</button></div>
+    ${list.length ? `<div class="grid">${list.map(id=>cardHTML(id,{size:"sm"})).join("")}</div>` : `<p class="muted">Nessuna carta.</p>`}
+  </div></div>`;
+}
+
+/* ---------------- events ---------------- */
+document.addEventListener("click", async e => {
+  const el = e.target.closest("[data-act]"); if(!el) return;
+  const act = el.dataset.act, id = el.dataset.id!=null ? +el.dataset.id : null;
+  if(act==="close-sheet"){ if(e.target===el || el.tagName==="BUTTON"){ UI.sheet=null; render(); } return; }
+  switch(act){
+    case "opt": OPTS[el.dataset.k] = el.dataset.v; save(KEY_OPTS, OPTS); break;
+    case "new": newGame(); window.scrollTo(0,0); break;
+    case "tutorial": newGame("tut"); window.scrollTo(0,0); break;
+    case "guided": newGame("guided"); window.scrollTo(0,0); break;
+    case "setname": OPTS.name = SUGG[+el.dataset.v]; save(KEY_OPTS, OPTS); break;
+    case "rollname": OPTS.name = randName(OPTS.name); save(KEY_OPTS, OPTS); break;
+    case "tip": S.tips[el.dataset.v] = true; break;
+    case "trivia-ok": S.showTrivia = false; break;
+    case "resume": VIEW="game"; break;
+    case "go": VIEW = el.dataset.v; UI.msg=""; UI.confirmReset=false; window.scrollTo(0,0); break;
+    case "pick": if(blocked(id)) break; UI.sel = id; if(S.step==="open" && UI.voce===peak(id) && !ciakOK("you")) UI.voce=null; break;
+    case "voce": { const e1 = sEntry(); if(e1 && e1.must && e1.must.voce!=null && +el.dataset.v!==e1.must.voce) break; UI.voce = +el.dataset.v; break; }
+    case "play-open": if(UI.sel!=null && UI.voce!=null){ playOpen(); UI.sel=null; } break;
+    case "play-respond": if(UI.sel!=null){ playRespond(); UI.sel=null; } break;
+    case "steal": resolvePending(id); break;
+    case "trk-steal": case "trk-back": resolvePending(+el.dataset.v); break;
+    case "inf-take": UI.picked[0] = id; break;
+    case "inf-give": UI.picked[1] = id; break;
+    case "inf-go": if(UI.picked[0]!=null && UI.picked[1]!=null) resolvePending([UI.picked[0],UI.picked[1]]); break;
+    case "inf-skip": resolvePending(null); break;
+    case "trk-bonus": resolvePending(+el.dataset.v); break;
+    case "trk-from": case "trk-to": resolvePending(+el.dataset.v); break;
+    case "stallo-go": case "duel-go": if(UI.sel!=null){ const s=UI.sel; UI.sel=null; resolvePending(s); } break;
+    case "gift": if(UI.sel!=null) doGift(); break;
+    case "continue": afterReveal(); break;
+    case "discard": if(UI.sel!=null){ doDiscard(); } break;
+    case "riprese": startRiprese(); break;
+    case "final": if(UI.sel!=null) finalStallo(); break;
+    case "sheet": UI.sheet = el.dataset.v; break;
+    case "reset": UI.confirmReset = true; break;
+    case "reset-no": UI.confirmReset = false; break;
+    case "reset-yes": STATS = emptyStats(); save(KEY_STATS, STATS); UI.confirmReset=false; UI.msg=""; break;
+    case "copy": {
+      const code = encodeCode();
+      try{ await navigator.clipboard.writeText(code); UI.msg="copied"; }
+      catch(err){ UI.msg="nocopy"; render(); const t=document.getElementById("code-out"); if(t){ t.focus(); t.select(); } return; }
+      break; }
+    case "share": try{ await navigator.share({title:"Kill Quentin", text:"Kill Quentin, il mio codice di salvataggio: "+encodeCode()}); }catch(err){ if(err && err.name!=="AbortError"){ UI.msg="nocopy"; } } break;
+    case "load": {
+      const r = decodeCode(document.getElementById("code-in").value);
+      if(!r){ UI.msg="bad"; break; }
+      STATS = r.stats; save(KEY_STATS, STATS); Object.assign(OPTS, r.opts); save(KEY_OPTS, OPTS); UI.msg="loaded"; break; }
+    default: return;
+  }
+  render();
+  if(S && S.script && VIEW==="game" && ["play-open","play-respond","continue","discard","riprese","stallo-go","duel-go","trk-steal","trk-back","trk-from","trk-to","trk-bonus","inf-go","inf-skip","gift"].includes(act)) window.scrollTo({top:0});
+});
+document.addEventListener("input", e => {
+  const t = e.target; if(!t || !t.id) return;
+  if(t.id==="inp-name"){ OPTS.name = t.value.slice(0,18); save(KEY_OPTS, OPTS); }
+  if(t.id==="inp-cname"){ OPTS.cname = t.value.slice(0,18); save(KEY_OPTS, OPTS); }
+});
+document.addEventListener("keydown", e => { if(e.key==="Escape" && UI.sheet){ UI.sheet=null; render(); } });
+
+/* ---------------- boot (keeps a game in progress across page updates) ---------------- */
+function start(data){
+  if(data && data.S && data.S.P){ S = data.S; VIEW = data.VIEW || "game"; }
+  render();
+}
+window.claude?.hot?.snapshot?.(() => ({S, VIEW}));
+window.claude?.hot?.ready ? window.claude.hot.ready(start) : start(window.claude?.hot?.data ?? {});
+</script>
