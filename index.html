@@ -884,6 +884,7 @@ function homeHTML(){
       ${OPTS.mode==="classica" ? `<button class="btn ghost" data-act="guided">Partita guidata · Classica</button>` : ""}
       <button class="btn ghost" data-act="go" data-v="rules">Regole</button>
       <button class="btn ghost" data-act="go" data-v="stats">Le tue partite</button>
+      ${fsBtn("btn ghost")}
       <p class="hint">${summaryLine()}</p>
     </div>
     <p class="legal">Kill Quentin è un gioco di carte amatoriale, ideato per divertimento e senza scopo di lucro. Non è affiliato né approvato dagli autori, dagli studi o dai titolari dei film citati. Personaggi, titoli e immagini appartengono ai rispettivi proprietari.</p>
@@ -978,10 +979,22 @@ function statsHTML(){
   </section>`;
 }
 
+const FS_OK = !!(document.fullscreenEnabled || document.webkitFullscreenEnabled);
+const inFS = () => !!(document.fullscreenElement || document.webkitFullscreenElement);
+function toggleFS(){
+  try{
+    if(inFS()){ (document.exitFullscreen || document.webkitExitFullscreen).call(document); }
+    else { const el = document.documentElement; const p = (el.requestFullscreen || el.webkitRequestFullscreen).call(el); if(p && p.catch) p.catch(()=>{}); }
+  }catch(e){}
+}
+const fsBtn = (cls) => FS_OK ? `<button type="button" class="${cls}" data-act="fs" aria-pressed="${inFS()?"true":"false"}">${inFS()?"Esci da schermo intero":"Schermo intero"}</button>` : "";
+document.addEventListener("fullscreenchange", () => render());
+document.addEventListener("webkitfullscreenchange", () => render());
 function topbarHTML(){
   const ph = S.phase===1 ? "Provini" : "Riprese";
   return `<div class="topbar">
     <button class="btn ghost small" data-act="go" data-v="home">Menu</button>
+    ${fsBtn("btn ghost small fs")}
     <div class="phase">${ph} · scena <span>${Math.min(S.scene,S.nS)}</span> di ${S.nS}${isT()?` · esclusa <span>${V[S.ex]}</span>`:""}</div>
     <div class="score"><span>${NM("you")} <b>${score("you")}</b></span><span>${NM("ai")} <b>${score("ai")}</b></span></div>
   </div>`;
@@ -1258,6 +1271,7 @@ document.addEventListener("click", async e => {
   switch(act){
     case "opt": OPTS[el.dataset.k] = el.dataset.v; save(KEY_OPTS, OPTS); break;
     case "new": newGame(); window.scrollTo(0,0); break;
+    case "fs": toggleFS(); return;
     case "tutorial": newGame("tut"); window.scrollTo(0,0); break;
     case "guided": newGame("guided"); window.scrollTo(0,0); break;
     case "setname": OPTS.name = SUGG[+el.dataset.v]; save(KEY_OPTS, OPTS); break;
