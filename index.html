@@ -32,6 +32,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
 .btn{border:2px solid var(--yellow);background:var(--yellow);color:var(--ink);font-weight:700;font-size:18px;letter-spacing:.06em;text-transform:uppercase;padding:10px 20px;border-radius:4px;min-height:46px}
 .btn:hover{filter:brightness(1.08)}
 .btn.ghost{background:transparent;color:var(--yellow)}
+.btn.expo{display:block;text-align:center;text-decoration:none;background:#B070E8;color:#12061c;border-color:#B070E8}
+.btn.expo.locked{background:#2b2b2b;color:#7d7d7d;border:1px dashed #555;cursor:not-allowed}
 .btn.small{font-size:15px;padding:6px 12px;min-height:38px}
 .btn:disabled{opacity:.35;cursor:not-allowed;filter:none}
 .muted{color:var(--muted)}
@@ -124,6 +126,11 @@ table.st tr.tot td{color:var(--yellow);font-weight:700;border-bottom:0}
 .hand{display:flex;gap:12px;overflow-x:auto;padding:6px 2px 12px;justify-content:center;scroll-snap-type:x mandatory}
 .hand>*{scroll-snap-align:center}
 @media (max-width:640px){.hand{justify-content:flex-start}}
+.handnav{display:none;align-items:center;gap:8px;justify-content:center;margin-top:10px;font-size:14px;color:var(--muted)}
+.handnav b{color:var(--yellow)}
+.handnav button{width:30px;height:30px;border-radius:50%;border:2px solid var(--line);background:var(--panel2);color:var(--text);font:700 14px/1 inherit;font-family:inherit;padding:0}
+.handnav button.on{border-color:var(--yellow);color:var(--yellow)}
+@media (max-width:640px){.handnav{display:flex}}
 .hand .card{cursor:pointer}
 .tracks{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;align-items:stretch}
 .trk{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:6px 8px;display:flex;flex-direction:column;gap:3px;min-width:0;position:relative}
@@ -290,6 +297,29 @@ table.st tr.tot td{color:var(--yellow);font-weight:700;border-bottom:0}
 .final .big{font-size:22px;font-variant-numeric:tabular-nums}
 
 @media (prefers-reduced-motion:reduce){.card{transition:none}}
+
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px}
+.badge{border:1px solid #3a342b;border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;gap:2px;opacity:.55;font-size:14px}
+.badge b{font-size:15px}.badge.on{opacity:1;border-color:var(--yellow)}.badge.on b{color:var(--yellow)}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.gi{border:1px solid #3a342b;border-radius:8px;padding:10px 12px}.gi.lock{opacity:.4}
+.gi .tfilm{margin:0 0 4px;font-weight:700}.gi .tfilm span{opacity:.6;font-weight:400}.gi .ttext{margin:0;font-size:15px}
+.cine.ts-pulp{background:#0d0d0d}
+.cine.ts-pulp .cine-t{color:#F2C230;text-shadow:5px 5px 0 #C0261C,9px 9px 0 #111;-webkit-text-stroke:2px #111;font-style:italic;transform:skew(-6deg)}
+.cine.ts-western{background:#241608}
+.cine.ts-western .cine-t{font-family:Georgia,"Times New Roman",serif;font-weight:900;color:#E9C98A;-webkit-text-stroke:0;text-shadow:3px 3px 0 #6b3b12,0 0 28px rgba(233,160,60,.45);letter-spacing:.08em}
+.cine.ts-western .cine-bar{background:#E9C98A}
+.cine.ts-grindhouse{background:radial-gradient(circle at 50% 50%,#1b0b0b,#000)}
+.cine.ts-grindhouse .cine-t{color:#fff;-webkit-text-stroke:0;text-shadow:3px 0 #E01B1B,-3px 0 #14b8c8;transform:rotate(-3deg);letter-spacing:.04em}
+.cine.ts-grindhouse .cine-bar{background:#E01B1B}
+@media (min-width:1000px){
+  .hand{padding-top:22px}
+  .hand .card{margin:0 -16px;transform-origin:50% 130%}
+  .hand .card:nth-child(1):not(:last-child){transform:rotate(-5deg) translateY(8px)}
+  .hand .card:nth-child(3){transform:rotate(5deg) translateY(8px)}
+  .hand .card:hover{transform:translateY(-14px) rotate(0);z-index:3}
+  .hand .card.sel{transform:translateY(-18px) rotate(0);z-index:4}
+}
 </style>
 </head>
 <body>
@@ -324,7 +354,7 @@ const powerTxt = p => (isT() ? POWER_TXT_T : POWER_TXT)[p];
 const PW = id => { const p = CARDS[id].power; return p && (isT() || !NEWP.includes(p)) ? p : null; };
 const POWER_EV = {"Fuori sequenza":0.9,"Resa dei conti":0.7,"Sono uno sbirro":0.6,"Stallo alla messicana":0.8};
 const COLOR_NAME = {R:"rosso", G:"giallo"};
-const NAMES = ["Samuel L. Jackson","Uma Thurman","John Travolta","Christoph Waltz","Tim Roth","Harvey Keitel","Michael Madsen","Steve Buscemi","Pam Grier","Kurt Russell","Jamie Foxx","Lucy Liu","Brad Pitt","Leonardo DiCaprio","Bruce Willis","Zoë Bell","Diane Kruger","Michael Fassbender","Robert Forster","Kerry Washington","Margot Robbie","Lawrence Bender"];
+const NAMES = ["Samuel L. Jackson","Uma Thurman","John Travolta","Christoph Waltz","Tim Roth","Harvey Keitel","Steve Buscemi","Pam Grier","Kurt Russell","Jamie Foxx","Lucy Liu","Brad Pitt","Leonardo DiCaprio","Bruce Willis","Zoë Bell","Diane Kruger","Michael Fassbender","Kerry Washington","Margot Robbie","Lawrence Bender"];
 const randName = (not) => { const l = NAMES.filter(n=>n!==not); return l[Math.floor(Math.random()*l.length)]; };
 const NM = k => esc(S && S.names ? S.names[k] : (k==="you" ? "Tu" : "Computer"));
 const CIAK = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 5.5h10V11H1z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M1 5.5 2 2l9.2 1.6-.3 1.9" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>';
@@ -345,13 +375,26 @@ function tTotal(k){ return S.T[k].reduce((a,b)=>a+b,0); }
 function gain(k, v, d=1){ const t=[...S.T[k]]; const b=tScore(t,S.ex); t[v]=Math.max(0,t[v]+d); return tScore(t,S.ex)-b; }
 
 /* ---------------- storage, stats, save code ---------------- */
-const KEY_STATS = "killquentin.stats.v2", KEY_OPTS = "killquentin.opts.v1", PREFIX = "KQN1-";
+const KEY_EXP = "killquentin.expunlock.v1";
+let EXPU = false; try{ EXPU = localStorage.getItem(KEY_EXP)==="1"; }catch(e){}
+function unlockExp(){ EXPU = true; try{ localStorage.setItem(KEY_EXP,"1"); }catch(e){} }
+let tapN = 0, tapT = 0;
+const KEY_STATS = "killquentin.stats.v2", KEY_OPTS = "killquentin.opts.v1", KEY_AW = "killquentin.awards.v1", PREFIX = "KQN1-";
 const emptyRow = () => ({w:0,l:0,d:0});
 const emptyStats = () => ({col:{R:emptyRow(),G:emptyRow()}, lvl:{normale:emptyRow(),difficile:emptyRow()}, mode:{tracciati:emptyRow(),classica:emptyRow()}});
 function load(key, fb){ try{ const v = localStorage.getItem(key); return v ? JSON.parse(v) : fb; }catch(e){ return fb; } }
 function save(key, val){ try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){} }
 let STATS = load(KEY_STATS, null) || emptyStats();
-let OPTS = Object.assign({color:"R", diff:"difficile", mode:"tracciati", name:"", cname:""}, load(KEY_OPTS, {}));
+let OPTS = Object.assign({color:"R", diff:"difficile", mode:"tracciati", name:"", cname:"", title:"classico"}, load(KEY_OPTS, {}));
+const emptyAW = () => ({cw:{}, best:0, cur:0});
+function cleanAW(a){
+  const okN = n => Number.isInteger(n) && n>=0 && n<1e6, out = emptyAW();
+  if(!a || typeof a!=="object") return out;
+  if(a.cw && typeof a.cw==="object") for(const k of Object.keys(a.cw)){ const i=+k; if(Number.isInteger(i) && i>=0 && i<CARDS.length && okN(a.cw[k]) && a.cw[k]>0) out.cw[i]=a.cw[k]; }
+  if(okN(a.best)) out.best=a.best; if(okN(a.cur)) out.cur=a.cur;
+  return out;
+}
+let AW = cleanAW(load(KEY_AW, null));
 if(!OPTS.name){ OPTS.name = randName(); save(KEY_OPTS, OPTS); }
 const SUGG = [...NAMES].sort(()=>Math.random()-.5).slice(0,5);
 function totalRow(){ const t=emptyRow(); for(const k of ["R","G"]) for(const f of ["w","l","d"]) t[f]+=STATS.col[k][f]; return t; }
@@ -366,9 +409,46 @@ function recordResult(res){
   if(S.tutorial) return;
   const f = res>0 ? "w" : res<0 ? "l" : "d";
   STATS.col[S.color][f]++; STATS.lvl[S.diff][f]++; STATS.mode[S.mode||"classica"][f]++; save(KEY_STATS, STATS);
+  AW.cur = res>0 ? AW.cur+1 : 0; AW.best = Math.max(AW.best, AW.cur);
+  for(const id of (S.ywins||[])) AW.cw[id] = (AW.cw[id]||0)+1;
+  save(KEY_AW, AW);
 }
+/* premi, titoli e curiosità sbloccabili: tutto deriva dalle statistiche e da AW */
+const wins = () => totalRow().w;
+const BADGES = () => {
+  const w = wins(), fav = favCard();
+  return [
+    {n:"Primo ciak", d:"Vinci la tua prima partita.", g:w>=1},
+    {n:"Regista emergente", d:"10 vittorie.", g:w>=10},
+    {n:"Palma d'oro", d:"25 vittorie.", g:w>=25},
+    {n:"Oscar alla carriera", d:"50 vittorie.", g:w>=50},
+    {n:"Rosso e giallo", d:"Vinci con entrambi i mazzi.", g:STATS.col.R.w>0 && STATS.col.G.w>0},
+    {n:"Mano dura", d:"Vinci una partita in modalità Difficile.", g:STATS.lvl.difficile.w>0},
+    {n:"Doppio registro", d:"Vinci sia al gioco base sia alla versione facile.", g:STATS.mode.tracciati.w>0 && STATS.mode.classica.w>0},
+    {n:"Tripla corona", d:"Tre vittorie di fila.", g:AW.best>=3},
+    {n:"Serie da cinque", d:"Cinque vittorie di fila.", g:AW.best>=5},
+    {n:"Attore feticcio", d:"Vinci 5 scene con la stessa carta.", g:!!fav && fav.n>=5},
+  ];
+};
+function favCard(){
+  let best=null; for(const k of Object.keys(AW.cw)){ const n=AW.cw[k]; if(!best || n>best.n) best={id:+k,n}; }
+  return best;
+}
+const TITLES = [
+  {id:"classico", n:"Classico", need:0},
+  {id:"pulp", n:"Pulp", need:3},
+  {id:"western", n:"Western", need:10},
+  {id:"grindhouse", n:"Grindhouse", need:20},
+];
+const titleOK = id => { const t = TITLES.find(x=>x.id===id); return !!t && wins()>=t.need; };
+const TRV_PER_WIN = 3;
+function triviaOrder(){ // ordine fisso ma mescolato tra i film
+  const n = TRIVIA.length; let st = Math.max(1, Math.round(n*0.382)); const g=(a,b)=>b?g(b,a%b):a; while(g(st,n)!==1) st++;
+  return Array.from({length:n},(_,i)=>(i*st)%n);
+}
+const triviaUnlocked = () => Math.min(TRIVIA.length, wins()*TRV_PER_WIN);
 function encodeCode(){
-  const json = JSON.stringify({v:1, s:STATS, o:{color:OPTS.color, diff:OPTS.diff, mode:OPTS.mode}});
+  const json = JSON.stringify({v:1, s:STATS, a:{cw:AW.cw, best:AW.best}, o:{color:OPTS.color, diff:OPTS.diff, mode:OPTS.mode, title:OPTS.title}, x:EXPU?1:0});
   return PREFIX + btoa(unescape(encodeURIComponent(json))).replace(/=+$/,"");
 }
 function decodeCode(raw){
@@ -388,7 +468,15 @@ function decodeCode(raw){
   else { delete out.mode; migrate(out); }
   const opts = {};
   if(o.o){ if(["R","G","X"].includes(o.o.color)) opts.color=o.o.color; if(["normale","difficile"].includes(o.o.diff)) opts.diff=o.o.diff; if(["tracciati","classica"].includes(o.o.mode)) opts.mode=o.o.mode; }
-  return {stats:out, opts};
+  if(o.a!==undefined){
+    const a=o.a; if(!a || typeof a!=="object" || typeof a.cw!=="object" || !a.cw) return null;
+    for(const k of Object.keys(a.cw)){ const i=+k; if(!(Number.isInteger(i) && i>=0 && i<CARDS.length && okN(a.cw[k]))) return null; }
+    if(!okN(a.best)) return null;
+  }
+  const aw = cleanAW(o.a ? {cw:o.a.cw, best:o.a.best, cur:0} : null);
+  if(o.x===1) unlockExp();
+  if(o.o && typeof o.o.title==="string" && TITLES.some(t=>t.id===o.o.title)) opts.title=o.o.title;
+  return {stats:out, opts, aw};
 }
 
 /* ---------------- game state ---------------- */
@@ -578,6 +666,7 @@ function resolve(opener, oCard, rCard, v){
   else if(C(oCard).quota!==C(rCard).quota) why = `${V[v]}: ${vo} pari. Decide la Quota: ${C(card.you).quota} contro ${C(card.ai).quota}.`;
   else why = `${V[v]}: ${vo} pari e anche la Quota è pari. Vince chi ${isT()?"apre":"risponde"}.`;
   S.P[w].won.push(oCard, rCard);
+  if(w==="you" && !S.tutorial){ (S.ywins = S.ywins||[]).push(card.you); }
   S.used.push(v);
   S.cur = {opener, voce:v, you:card.you, ai:card.ai, winner:w, why, flipped:false, ciak};
   S.events = []; S.pending = [];
@@ -825,6 +914,7 @@ function render(){
   if(VIEW==="home") app.innerHTML = homeHTML();
   else if(VIEW==="rules") app.innerHTML = rulesHTML();
   else if(VIEW==="stats") app.innerHTML = statsHTML();
+  else if(VIEW==="gallery") app.innerHTML = galleryHTML();
   else app.innerHTML = gameHTML();
   if(UI.sheet) app.insertAdjacentHTML("beforeend", sheetHTML());
   if(VIEW==="game" && S && S.showTrivia) app.insertAdjacentHTML("beforeend", triviaHTML());
@@ -834,7 +924,7 @@ function showCine(){
   S.cineDone = true;
   const r = S.result, t = r.res>0 ? "Hai vinto" : r.res<0 ? "Hai perso" : "Pareggio";
   const el = document.createElement("div");
-  el.className = "cine " + (r.res>0 ? "win" : r.res<0 ? "lose" : "draw");
+  el.className = "cine " + (r.res>0 ? "win" : r.res<0 ? "lose" : "draw") + (r.res>0 && titleOK(OPTS.title) ? " ts-"+OPTS.title : "");
   el.setAttribute("role","status");
   el.innerHTML = `<div class="cine-in"><div class="cine-bar"></div><div class="cine-t">${t}</div><div class="cine-s">Kill Quentin</div><div class="cine-bar"></div></div>`;
   const close = () => { el.remove(); };
@@ -863,8 +953,9 @@ function homeHTML(){
     </div>
     <div class="setup">
       <h3>Modalità</h3>
-      <div class="seg">${seg("mode",[["tracciati","Tracciati"],["classica","Classica"]])}</div>
-      <p class="note" style="margin:0">${OPTS.mode==="classica" ? "Variante semplice: vince chi fa più prese." : "La versione principale: ogni presa avanza su un tracciato, una voce è esclusa a caso."}</p>
+      <div class="seg">${seg("mode",[["tracciati","Gioco base"],["classica","Versione facile"]])}</div>
+      <p class="note" style="margin:0">${OPTS.mode==="classica" ? "Versione facile: vince chi fa più prese." : "Il gioco base: ogni presa avanza su un tracciato, una voce è esclusa a caso."}</p>
+      ${EXPU ? `<a class="btn expo" href="espansione.html">Espansione · Collaboratori</a><p class="note" style="margin:0">Sbloccata: 12 collaboratori da assoldare con le carte vinte. Si gioca sul gioco base, con un mazzetto in più.</p>` : `<button type="button" class="btn expo locked" data-act="expo" aria-disabled="true">🔒 Espansione · Collaboratori</button><p class="note" style="margin:0">${UI.expoMsg || "Bloccata. Qualcuno dice che il titolo sul manifesto nasconde un segreto."}</p>`}
       <h3>Giocatori</h3>
       <label for="inp-name">Il tuo nome</label>
       <input id="inp-name" type="text" maxlength="18" list="nm-list" value="${esc(OPTS.name||"")}" autocomplete="off">
@@ -880,8 +971,8 @@ function homeHTML(){
     <div class="menu">
       ${S && S.step!=="end" ? `<button class="btn" data-act="resume">Riprendi la partita</button>` : ""}
       <button class="btn ${S && S.step!=="end" ? "ghost":""}" data-act="new">Nuova partita</button>
-      <button class="btn ghost" data-act="tutorial">Tutorial · Tracciati</button>
-      ${OPTS.mode==="classica" ? `<button class="btn ghost" data-act="guided">Partita guidata · Classica</button>` : ""}
+      <button class="btn ghost" data-act="tutorial">Tutorial · Gioco base</button>
+      ${OPTS.mode==="classica" ? `<button class="btn ghost" data-act="guided">Partita guidata · Versione facile</button>` : ""}
       <button class="btn ghost" data-act="go" data-v="rules">Regole</button>
       <button class="btn ghost" data-act="go" data-v="stats">Le tue partite</button>
       ${fsBtn("btn ghost")}
@@ -912,13 +1003,13 @@ function rulesHTML(){
       <li>Chi apre gioca una carta coperta e annuncia una voce.</li>
       <li><b>Niente typecasting:</b> non si può annunciare la voce col ciak della propria carta.</li>
       <li>L'altro risponde con una carta e si rivelano insieme.</li>
-      <li>Vince il valore più alto nella voce annunciata. A parità decide la Quota; se è pari anche quella, vince chi risponde (nei Tracciati vince chi apre).</li>
+      <li>Vince il valore più alto nella voce annunciata. A parità decide la Quota; se è pari anche quella, vince chi risponde (nel gioco base vince chi apre).</li>
     </ol>
     <h2>Provini e riprese</h2>
     <p class="just"><b>Provini, 7 scene:</b> dopo ogni scena ognuno scarta una carta dalla mano, scoperta, nella pila dei Rifiutati dell'avversario, poi pesca fino a tornare a 3. Le carte rimaste nell'agenda alla fine dei provini escono dal gioco.</p>
     <p class="just"><b>Riprese, 7 scene:</b> i Rifiutati che hai ricevuto, cioè gli scarti dell'avversario, diventano la tua nuova agenda. Tieni le 3 carte che hai in mano. Niente più scarti: dopo ogni scena peschi fino a 3.</p>
 
-    <h2>Tracciati · la versione principale</h2>
+    <h2>Gioco base · i tracciati</h2>
     <ol>
       <li>A inizio partita si esclude a caso una voce: non si può annunciare e non ha un tracciato.</li>
       <li>Ognuno ha un tracciato per ciascuna delle altre 4 voci. Chi vince una scena avanza di 1 sul tracciato della voce annunciata, di 2 se nella scena c'era una carta potere.</li>
@@ -927,22 +1018,49 @@ function rulesHTML(){
       <li><b>Ruolo cucito addosso:</b> nelle riprese, una volta a partita, chi apre può annunciare la voce col ciak della propria carta. Se vince, l'avversario può scambiare una carta della sua mano con una dei suoi scarti (la sua agenda). Se perde, l'avversario avanza nella voce e anche di un passo su un tracciato a sua scelta.</li>
       <li>A parità totale, cioè stesso valore e stessa Quota, vince chi ha aperto.</li>
     </ol>
-    <h2>Carte potere · Tracciati</h2>
+    <h2>Carte potere · Gioco base</h2>
     <p class="just">Le carte con la fascia scura e la scritta "Vale 2" sono carte potere. Il potere scatta quando la carta <b>perde</b> la scena, e non dipende da chi l'ha giocata. Se nella scena c'è una carta potere, chi vince avanza di 2 passi invece di 1. Sono 7: leggi il potere in fondo alla foto della carta, qui c'è il testo completo.</p>
     ${pw(POWER_TXT_T, true)}
 
-    <h2>Classica · la variante semplice</h2>
+    <h2>Versione facile · la variante semplice</h2>
     <ol>
       <li>Si gioca con tutte e 5 le voci, ma ogni voce si chiama una volta per giro: finché non sono uscite tutte e 5 non si ripete. Il giro riparte da capo all'inizio delle riprese.</li>
       <li>Se chi apre non può giocare, perché le voci libere sono tutte la voce col ciak delle sue carte, regala all'avversario una carta a sua scelta.</li>
       <li>Chi vince una scena tiene le due carte. Alla fine vince chi ha più carte; le carte potere valgono 2. A parità, stallo alla messicana.</li>
     </ol>
-    <h2>Carte potere · Classica</h2>
+    <h2>Carte potere · Versione facile</h2>
     <p class="just">Anche qui le carte con "Vale 2" hanno un potere che scatta quando perdono la scena. Sono 4, e ognuna vale 2 carte nel conteggio finale.</p>
     ${pw(POWER_TXT)}
   </section>`;
 }
 
+function awardsHTML(){
+  const w = wins(), b = BADGES(), fav = favCard(), un = triviaUnlocked();
+  const got = b.filter(x=>x.g).length;
+  const nxt = TITLES.find(t=>w<t.need);
+  return `<h2>Premi</h2>
+    <p class="note">${got} su ${b.length} sbloccati${AW.best?` · miglior serie: ${AW.best} ${AW.best===1?"vittoria":"vittorie"} di fila`:""}</p>
+    <div class="badges">${b.map(x=>`<div class="badge ${x.g?"on":""}"><b>${x.g?"★ ":"☆ "}${esc(x.n)}</b><span>${esc(x.d)}</span></div>`).join("")}</div>
+    <h2>Carta preferita</h2>
+    ${fav ? `<p class="just"><b>${esc(C(fav.id).name)}</b>: ${fav.n} ${fav.n===1?"scena vinta":"scene vinte"} con questa carta.</p>` : `<p class="muted">Compare dopo la prima vittoria: è la carta con cui hai vinto più scene.</p>`}
+    <h2>Titolo di vittoria</h2>
+    <div class="row">${TITLES.map(t=>t.need<=w ? `<button class="btn small ${OPTS.title===t.id?"":"ghost"}" data-act="title" data-v="${t.id}" aria-pressed="${OPTS.title===t.id}">${t.n}</button>` : `<button class="btn small ghost" disabled>${t.n} · ${t.need} vittorie</button>`).join("")}</div>
+    <p class="note">Lo stile della scritta "Hai vinto" a fine partita. ${nxt?`Prossimo stile: ${nxt.n}, a ${nxt.need} vittorie.`:"Li hai sbloccati tutti."}</p>
+    <h2>Galleria delle curiosità</h2>
+    <p class="just">Ogni vittoria sblocca ${TRV_PER_WIN} curiosità sui film: ne hai ${un} su ${TRIVIA.length}.</p>
+    <button class="btn ghost small" data-act="go" data-v="gallery" style="align-self:flex-start">Apri la galleria</button>`;
+}
+function galleryHTML(){
+  const ord = triviaOrder(), un = triviaUnlocked();
+  return `<section class="page">
+    <button class="btn ghost small" data-act="go" data-v="stats" style="align-self:flex-start">← Indietro</button>
+    <h1 class="title">Curiosità</h1>
+    <p class="note">${un} su ${TRIVIA.length} sbloccate. Vinci partite per scoprirne altre.</p>
+    <div class="gal">${ord.map((ix,i)=>{ const t=TRIVIA[ix]; return i<un
+      ? `<div class="gi"><p class="tfilm">${esc(t.f)} <span>${t.y}</span></p><p class="ttext">${esc(t.t)}</p></div>`
+      : `<div class="gi lock"><p class="tfilm">🔒 Da sbloccare</p><p class="ttext">Vinci altre partite.</p></div>`; }).join("")}</div>
+  </section>`;
+}
 function statsHTML(){
   migrate(STATS);
   const t = totalRow(), n = t.w+t.l+t.d;
@@ -955,10 +1073,11 @@ function statsHTML(){
     ${n ? `
     <div class="tblwrap"><table class="st">${head}<tbody>${tr("Mazzo rosso",STATS.col.R)}${tr("Mazzo giallo",STATS.col.G)}${tr("Totale",t,"tot")}</tbody></table></div>
     <div class="tblwrap"><table class="st">${head}<tbody>${tr("Normale",STATS.lvl.normale)}${tr("Difficile",STATS.lvl.difficile)}</tbody></table></div>
-    <div class="tblwrap"><table class="st">${head}<tbody>${tr("Tracciati",STATS.mode.tracciati)}${tr("Classica",STATS.mode.classica)}</tbody></table></div>
+    <div class="tblwrap"><table class="st">${head}<tbody>${tr("Gioco base",STATS.mode.tracciati)}${tr("Versione facile",STATS.mode.classica)}</tbody></table></div>
     ` : `<p class="muted">Le tue statistiche compariranno qui dopo la prima partita contro il computer.</p>`}
     ${UI.confirmReset ? `<div class="confirm"><p>Azzerare tutte le statistiche? Non si può annullare, a meno che tu non abbia un codice di salvataggio.</p><div class="row"><button class="btn small" data-act="reset-yes">Sì, azzera</button><button class="btn ghost small" data-act="reset-no">Annulla</button></div></div>`
       : (n ? `<button class="btn ghost small" data-act="reset" style="align-self:flex-start">Azzera statistiche</button>` : "")}
+    ${awardsHTML()}
     <h2>Salva i tuoi progressi</h2>
     <p class="just"><b>Perché te lo chiediamo.</b> Le statistiche restano solo in questo browser: se cambi telefono o browser, o cancelli i dati di navigazione, ripartono da zero. Con il codice di salvataggio le ritrovi in un attimo, ovunque.</p>
     <p class="just"><b>Tienilo da parte:</b> nelle prossime versioni il codice potrà sbloccare ricompense speciali, e chi ha registrato più partite partirà avvantaggiato.</p>
@@ -1035,7 +1154,9 @@ function tracksHTML(k){
   }).join("")}<div class="tsum">Punti <b>${score(k)}</b><span>tutti i tracciati tranne il più alto</span></div></div>`;
 }
 function handHTML(act, hi){
-  return `<div class="hand">${S.P.you.hand.map(id=>cardHTML(id,{click:act, sel:UI.sel===id, hi, dis:blocked(id)})).join("")}</div>`;
+  const hn = S.P.you.hand.length;
+  const nav = hn>1 ? `<div class="handnav" aria-hidden="false"><span>Hai <b>${hn} carte</b>: scorri di lato</span>${S.P.you.hand.map((_,i)=>`<button type="button" class="${i===0?"on":""}" data-act="hnav" data-v="${i}" aria-label="Carta ${i+1}">${i+1}</button>`).join("")}</div>` : "";
+  return nav + `<div class="hand">${S.P.you.hand.map(id=>cardHTML(id,{click:act, sel:UI.sel===id, hi, dis:blocked(id)})).join("")}</div>`;
 }
 
 function gameHTML(){
@@ -1265,6 +1386,8 @@ function sheetHTML(){
 
 /* ---------------- events ---------------- */
 document.addEventListener("click", async e => {
+  if(e.target.closest && e.target.closest(".ptitle") && !EXPU){ const t=Date.now(); tapN = (t-tapT<2500) ? tapN+1 : 1; tapT=t;
+    if(tapN>=5){ unlockExp(); tapN=0; UI.expoMsg=""; render(); window.scrollTo(0,document.body.scrollHeight*0); return; } }
   const el = e.target.closest("[data-act]"); if(!el) return;
   const act = el.dataset.act, id = el.dataset.id!=null ? +el.dataset.id : null;
   if(act==="close-sheet"){ if(e.target===el || el.tagName==="BUTTON"){ UI.sheet=null; render(); } return; }
@@ -1272,6 +1395,8 @@ document.addEventListener("click", async e => {
     case "opt": OPTS[el.dataset.k] = el.dataset.v; save(KEY_OPTS, OPTS); break;
     case "new": newGame(); window.scrollTo(0,0); break;
     case "fs": toggleFS(); return;
+    case "hnav": { const h = document.querySelector(".hand"); const c = h && h.children[+el.dataset.v]; if(c) h.scrollTo({left:c.offsetLeft-h.offsetLeft-2, behavior:"smooth"}); return; }
+    case "expo": UI.expoMsg = "Ancora bloccata: serve la mossa giusta sul manifesto."; render(); break;
     case "tutorial": newGame("tut"); window.scrollTo(0,0); break;
     case "guided": newGame("guided"); window.scrollTo(0,0); break;
     case "setname": OPTS.name = SUGG[+el.dataset.v]; save(KEY_OPTS, OPTS); break;
@@ -1279,6 +1404,7 @@ document.addEventListener("click", async e => {
     case "tip": S.tips[el.dataset.v] = true; break;
     case "trivia-ok": S.showTrivia = false; break;
     case "resume": VIEW="game"; break;
+    case "title": if(titleOK(el.dataset.v)){ OPTS.title = el.dataset.v; save(KEY_OPTS, OPTS); } break;
     case "go": VIEW = el.dataset.v; UI.msg=""; UI.confirmReset=false; window.scrollTo(0,0); break;
     case "pick": if(blocked(id)) break; UI.sel = id; if(S.step==="open" && UI.voce===peak(id) && !ciakOK("you")) UI.voce=null; break;
     case "voce": { const e1 = sEntry(); if(e1 && e1.must && e1.must.voce!=null && +el.dataset.v!==e1.must.voce) break; UI.voce = +el.dataset.v; break; }
@@ -1301,7 +1427,7 @@ document.addEventListener("click", async e => {
     case "sheet": UI.sheet = el.dataset.v; break;
     case "reset": UI.confirmReset = true; break;
     case "reset-no": UI.confirmReset = false; break;
-    case "reset-yes": STATS = emptyStats(); save(KEY_STATS, STATS); UI.confirmReset=false; UI.msg=""; break;
+    case "reset-yes": STATS = emptyStats(); save(KEY_STATS, STATS); AW = emptyAW(); save(KEY_AW, AW); OPTS.title="classico"; save(KEY_OPTS, OPTS); UI.confirmReset=false; UI.msg=""; break;
     case "copy": {
       const code = encodeCode();
       try{ await navigator.clipboard.writeText(code); UI.msg="copied"; }
@@ -1311,12 +1437,20 @@ document.addEventListener("click", async e => {
     case "load": {
       const r = decodeCode(document.getElementById("code-in").value);
       if(!r){ UI.msg="bad"; break; }
-      STATS = r.stats; save(KEY_STATS, STATS); Object.assign(OPTS, r.opts); save(KEY_OPTS, OPTS); UI.msg="loaded"; break; }
+      STATS = r.stats; save(KEY_STATS, STATS); AW = r.aw; save(KEY_AW, AW); if(!titleOK(OPTS.title)) OPTS.title="classico"; Object.assign(OPTS, r.opts); save(KEY_OPTS, OPTS); UI.msg="loaded"; break; }
     default: return;
   }
   render();
   if(S && S.script && VIEW==="game" && ["play-open","play-respond","continue","discard","riprese","stallo-go","duel-go","trk-steal","trk-back","trk-from","trk-to","trk-bonus","inf-go","inf-skip","gift"].includes(act)) window.scrollTo({top:0});
 });
+document.addEventListener("scroll", e => {
+  const h = e.target; if(!h || !h.classList || !h.classList.contains("hand")) return;
+  const kids = [...h.children]; if(!kids.length) return;
+  const step = kids.length>1 ? kids[1].offsetLeft - kids[0].offsetLeft : 1;
+  const max = h.scrollWidth - h.clientWidth;
+  const i = h.scrollLeft >= max-4 ? kids.length-1 : Math.round(h.scrollLeft/step);
+  const nav = h.previousElementSibling; if(nav && nav.classList.contains("handnav")) [...nav.querySelectorAll("button")].forEach((b,k)=>b.classList.toggle("on",k===i));
+}, true);
 document.addEventListener("input", e => {
   const t = e.target; if(!t || !t.id) return;
   if(t.id==="inp-name"){ OPTS.name = t.value.slice(0,18); save(KEY_OPTS, OPTS); }
